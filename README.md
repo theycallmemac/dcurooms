@@ -1,2 +1,5 @@
-# dcurooms
-A command line tool used to display room information and book and request rooms.
+# EventsOfficerScripts
+
+The role of Redbrick Events Officer isn't even remotely considered a technical position. It's pretty administrative, but I've written a few scripts that help me get around the filling out of forms, sending emails and booking of rooms.
+
+### 
