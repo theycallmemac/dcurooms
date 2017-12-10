@@ -11,8 +11,10 @@ echo -e "    booking - interacts with scripts to automate events officer tasks\n
 echo -e "DESCRIPTION"
 echo -e "    -r   To book a room using DCU registry booking forms:- booking -r\n"
 echo -e "    -l   To book a lab by emailing the DCU School of Computing secretary:- booking -l LG25\n"
-echo -e "    -c    Checks a rooms availability during a given timeslot:- booking -c\n"
-echo -e "    -h    Brings up these options:- booking -h\n"
+echo -e "    -c   Checks a rooms availability during a given timeslot:- booking -c\n"
+echo -e "    -fr  Checks a rooms availability in the Henry Grattan building for the current time:- booking -fr\n"
+echo -e "    -fl  Checks a albs availability in the School of Computing for the current time:- booking -fl\n"
+echo -e "    -h   Brings up these options:- booking -h\n"
 echo -e "AUTHOR"
 echo -e "    James McDermott (theycallmemac)\n"
 exit 0
@@ -23,13 +25,18 @@ if [ $OPTION == '-c' ] || [ $OPTION == '--check' ];then
   python check_availability.py $ARG1
 fi
 
+if [ $OPTION == '-fr' ] || [ $OPTION == '--freerooms' ];then
+  python free_now.py 1
+fi
+
+if [ $OPTION == '-fl' ] || [ $OPTION == '--freelabs' ];then
+  python free_now.py 0
+fi
 
 if [ $OPTION == '-l' ] || [ $OPTION == '--lab' ];then
-    python book_lab.py $ARG1
+    python book_lab.py
 fi
-
 
 if [ $OPTION == '-r' ] || [ $OPTION == '--room' ];then
-  python book_room.py $ARG1
+  python book_room.py
 fi
-
