@@ -37,6 +37,7 @@ __contributor:__ theycallmemac
 
   - setup.py
     - added to install dcurooms script with it's dependencies.
+    - changed license info in the script
 
   - scripts/dcurooms
     - dcurooms script added with the previous 'free_now.py' capabilities.

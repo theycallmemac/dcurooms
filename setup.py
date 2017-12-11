@@ -7,7 +7,7 @@ setup(name='dcurooms',
       description='Shows room information around the DCU campus',
       author='theycallmemac',
       url='',
-      license = 'MIT',
+      license = 'GPL-3.0',
       scripts=['scripts/dcurooms'],
       install_requires=[
           'mechanize', 'bs4', 'requests'
