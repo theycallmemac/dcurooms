@@ -20,8 +20,29 @@ __contributor:__ theycallmemac
   - free_now.py, booking.sh
     - created free_now.py and added support for this in the shell script.
 
-- CHANGELOG.md
-        - created a markdown file to document the changes to the code
+  - CHANGELOG.md
+    - created a markdown file to document the changes to the code.
+
+---
+
+---
+
+__entry:__ 11-12-2017
+__contributor:__ theycallmemac
+
+---
+
+  - README.md
+      - changed to include information on setup and how to run the script.
+
+  - setup.py
+    - added to install dcurooms script with it's dependencies.
+
+  - scripts/dcurooms
+    - dcurooms script added with the previous 'free_now.py' capabilities.
+
+  - book_lab.py, book_room.py, check_availability.py, booking.sh, free_now.py, booking.sh
+    - removed with a view to add their functionaltiies to dcurooms script.
 
 ---
 
