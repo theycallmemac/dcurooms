@@ -3,7 +3,7 @@
 from setuptools import setup
 from setuptools import find_packages
 setup(name='dcurooms',
-      version='0.1.0',
+      version='0.2.0',
       description='Shows room information around the DCU campus',
       author='theycallmemac',
       url='',
