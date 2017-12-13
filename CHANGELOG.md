@@ -47,3 +47,25 @@ __contributor:__ theycallmemac
 
 ---
 
+---
+
+__entry:__ 13-12-2017
+__contributor:__ theycallmemac
+
+---
+
+ 
+  - scripts/dcurooms
+    - now at v0.2.0 follwoing a number of minor changes.
+    - changed the "-f"/"--free" option to "-n"/"--now". This is the purposes of clarity in the command name.
+    - script now supports a "-f" or "--free" option which specificially displays rooms that are free as opposed to just the status of all rooms. This option checks the info returned from "-n"/"--now".
+    - changed license info which was incorrect.
+    - rewrote the get_current_time function to calculate the current week as opposed to it being hardcoded into the program.
+
+
+  - README.md
+    - added to long command information
+    - gave usage example to check for free rooms rather than all rooms
+
+---
+

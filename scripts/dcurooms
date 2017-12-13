@@ -1,51 +1,44 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import optparse
-import sys
-import cookielib
-import mechanize
-import requests
 import datetime
+from sys import exit 
+from optparse import OptionParser
+from cookielib import LWPCookieJar
+from mechanize import Browser, _http
+from requests import get
 from bs4 import BeautifulSoup
 
 __author__ = "theycallmemac"
-__version__ = '0.1'
+__version__ = '0.2.0'
 __copyright__ = 'Copyright (c) 2017 theycallmemac'
-__license__ = 'MIT License'
+__license__ = 'GPL-3.0'
 
-def get_current_time():
-    current = []
-    day = datetime.datetime.now().weekday()
-    current.append(day + 1)
-    hour = datetime.datetime.now().hour
-    current.append(hour)
-    minute = datetime.datetime.now().minute
-    current.append(minute)
+def get_current_time(date):
+    day = date.weekday()
+    hour = date.hour
+    minute = date.minute
 
-    return current
-
-def academic_week_number(date):
-    iso_year, iso_week_number, iso_weekday = date.isocalendar()
-    academic_start_week = 36
-    if iso_week_number >= academic_start_week:
-        academic_offset = -academic_start_week
+    year, week_no, weekday = date.isocalendar()
+    start = 36
+    if week_no >= start:
+        offset = -start
     else:
-        academic_offset = 52 - academic_start_week
-    academic_week = iso_week_number + academic_offset - 1
-    return str(academic_week)
+        offset = 52 - start
+    week = week_no + offset - 1
+    return str(week), str(day + 1), str(hour), str(minute)
 
 
 def build_timetable(room, week, day, hour):
-    browser = mechanize.Browser()
-    cookie_jar = cookielib.LWPCookieJar()
+    browser = Browser()
+    cookie_jar = LWPCookieJar()
     browser.set_cookiejar(cookie_jar)
     browser.set_handle_equiv(True)
     browser.set_handle_gzip(True)
     browser.set_handle_redirect(True)
     browser.set_handle_referer(True)
     browser.set_handle_robots(False)
-    browser.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+    browser.set_handle_refresh(_http.HTTPRefreshProcessor(), max_time=1)
     browser.addheaders = [("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")]
     url = "https://www101.dcu.ie/timetables/feed.php?room=" + room + "&week1=" + week + "&hour=" + str(hour) + "&day=" + day + "&template=location"
     browser.open(url)
@@ -53,7 +46,7 @@ def build_timetable(room, week, day, hour):
     return browser, url
 
 def check_room(timetable_url):
-    html = requests.get(timetable_url)
+    html = get(timetable_url)
     soup = BeautifulSoup(html.text, "lxml")
     tr = soup.select('tr')
 
@@ -61,11 +54,14 @@ def check_room(timetable_url):
 
 
 if __name__ == '__main__':
-    parser = optparse.OptionParser(description='Displays and books rooms around the DCU campus via provided timetable/module details', prog='dcurooms', version='%prog ' + __version__, usage='%prog [option]')
-    parser.add_option("-f", "--free", action="store_true", help="check for a given academic week")
-    parser.add_option("-c", "--computing", action="store_true", help="check what rooms are free in the School Of Computing")
-    parser.add_option("-g", "--grattan", action="store_true", help="check what rooms are free in the Henry Grattan building")
+    parser = OptionParser(description='Displays and books rooms around the DCU campus via provided timetable/module details', prog='dcurooms', version='%prog ' + __version__, usage='%prog [option]')
+    parser.add_option("-f", "--free", action="store_true", help="returns only the rooms/labs that are free in a building")
+    parser.add_option("-n", "--now", action="store_true", help="show the status of each room/lab as it is at the current time of checking")
+    parser.add_option("-c", "--computing", action="store_true", help="displays the status of the labs in the School of Computing")
+    parser.add_option("-g", "--grattan", action="store_true", help="displays the status of rooms in the Henry Grattan building")
+
     (options, arguments) = parser.parse_args()
+
     times = {'0800':'1', 
             '0830':'2', 
             '0900':'3',
@@ -96,52 +92,50 @@ if __name__ == '__main__':
             '2130':'28', 
             '2200':'29', 
             '2230':'30'}
-    if options.free == True:
-        arg = 12
+
+    if options.now == True:
         c = ['LG25','LG26','LG27','L101','L114','L125','L128']
         g = ['CG01', 'CG02','CG03','CG04','CG05','CG06','CG11','CG12','CG20','CG68','C166']
-        b = ['QG15', 'QG16', 'QG17', 'QG20', 'QG21', 'Q122']
-        n = ['HG20','HG21','HG22','HG23']
-        s = []
-        m = []
-        l = []
-        current = get_current_time()
-        if current[1] < 8:
+        week, day, hour, minute = get_current_time(datetime.datetime.now())
+        if int(hour) < 8:
             print("Oustide scheduled timetables. Try again at 08:00.")
             sys.exit()
-        if current[2] >= 30:
-            current[2] = '30'
+        if int(minute) >= 30:
+            minute = '30'
         else:
-            current[2] = '00'
-        time = str(current[1]) + str(current[2])
+            minute = '00'
+        current_time = hour + minute
         for k,v in times.items():
-            if k == time:
-                time = v
+            if k == current_time:
+                current_time = v
                 break
             else:
                 pass
-	week = academic_week_number(datetime.datetime.now())
-        
         if options.computing == True:
-            for room in c:
-                timetable, url = build_timetable("GLA." + room, week, str(current[0]), time)
-                status = check_room(url)
-                print(room + ": " + status)
+            if options.free == True:
+                for room in c:
+                    timetable, url = build_timetable("GLA." + room, week, day, current_time)
+                    status = check_room(url)
+                    if len(status) <= 9:
+                        print(room + ": " + status)
+            else:
+                for room in c:
+                    timetable, url = build_timetable("GLA." + room, week, day, current_time)
+                    status = check_room(url)
+                    print(room + ": " + status)
+
         elif options.grattan == True:
-            for room in g:
-                timetable, url = build_timetable("GLA." + room, week, str(current[0]), time)
-                status = check_room(url)
-                print(room + ": " + status)        
-        elif options.business == True:
-            for room in b:
-                timetable, url = build_timetable("GLA." + room, week, str(current[0]), time)
-                status = check_room(url)
-                print(room + ": " + status)       
-        elif options.nursing == True:
-            for room in n:
-                timetable, url = build_timetable("GLA." + room, week, str(current[0]), time)
-                status = check_room(url)
-                print(room + ": " + status)
+            if options.free == True:
+                for room in g:
+                    timetable, url = build_timetable("GLA." + room, week, day, current_time)
+                    status = check_room(url)
+                    if len(status) <= 9:
+                        print(room + ": " + status)       
+            else:
+                for room in g:
+                    timetable, url = build_timetable("GLA." + room, week, day, current_time)
+                    status = check_room(url)
+                    print(room + ": " + status) 
         else:
             parser.print_help()
     else:

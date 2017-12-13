@@ -19,6 +19,9 @@ cd into the clone and run ```python setup.py install``` as root to install.
 
 
 ### Usage
-To check the current availabilty of labs in the DCU School of Computing run ```dcurooms -fc```.
+To check the current availabilty of labs in the DCU School of Computing run ```dcurooms -nc``` or ```dcurooms --now --computing```.
 
-For help run ```dcurooms -h``` and for current version run ```dcurooms --version```.
+To show the rooms which are currently free in the Henry Grattan building run ```dcurooms -fnc``` or ```dcurooms --free --now --computing```.
+
+
+For help run ```dcurooms -h``` and for the current version run ```dcurooms --version```.

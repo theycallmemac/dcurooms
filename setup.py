@@ -15,7 +15,7 @@ setup(name='dcurooms',
       classifiers=[
             'Environment :: Console',
             'Natural Language :: English',
-            'License :: MIT License',
+            'License :: GPL-3.0 License',
             'Operating System :: OS Independent',
             'Programming Language :: Python'
 ])
