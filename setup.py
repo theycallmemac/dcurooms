@@ -3,12 +3,12 @@
 from setuptools import setup
 from setuptools import find_packages
 setup(name='dcurooms',
-      version='0.2.0',
+      version='0.2.1',
       description='Shows room information around the DCU campus',
       author='theycallmemac',
       url='',
       license = 'GPL-3.0',
-      scripts=['scripts/dcurooms'],
+      scripts=['scripts/dcurooms', 'scripts/dcurooms.py'],
       install_requires=[
           'mechanize', 'bs4', 'requests'
       ],

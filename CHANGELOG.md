@@ -69,3 +69,32 @@ __contributor:__ theycallmemac
 
 ---
 
+---
+
+__entry:__ 14-12-2017
+__contributor:__ theycallmemac
+
+---
+  - .gitignore
+    - created to ignore .pyc and .txt files
+    - also ignores egg-info aswell as build and dist directories
+
+  - scripts/dcurooms
+    - created, just import dcurooms.py script
+
+  - scripts/dcurooms.py
+    - now at v0.2.1 follwoing a number of fixes changes.
+    - import specific tools rather than entire libraries.
+    - functions return information ready for concatenation.
+    - fixed error for wen the hour returned from get_current_time was greater or equal to 23.
+
+  - ```__init__.py```
+    - added one in each directory for the unittests
+    - helps navigate around the project
+  - tests/test_free_now.py
+    - created unittest to check the return values of dcurooms
+    - tests for exit code
+    - tests if output is empty (indicating free) or a hardcoded string.
+
+---
+
