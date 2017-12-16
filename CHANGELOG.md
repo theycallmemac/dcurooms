@@ -83,7 +83,7 @@ __contributor:__ theycallmemac
     - created, just import dcurooms.py script
 
   - scripts/dcurooms.py
-    - now at v0.2.1 follwoing a number of fixes changes.
+    - now at v0.2.1 following a number of fixes changes.
     - import specific tools rather than entire libraries.
     - functions return information ready for concatenation.
     - fixed error for wen the hour returned from get_current_time was greater or equal to 23.
@@ -95,6 +95,25 @@ __contributor:__ theycallmemac
     - created unittest to check the return values of dcurooms
     - tests for exit code
     - tests if output is empty (indicating free) or a hardcoded string.
+
+---
+
+---
+
+__entry:__ 16-12-2017
+__contributor:__ theycallmemac
+
+---
+  - scripts/dcurooms.py
+    - now at v0.3.0 due to some minor changes in what the tool can do and it's usage.
+    - can now look up specific rooms on any given week and timeslot. 
+    - can also lookup a whole builing when provided with this info too.
+    - the "-f"/"--free" command now replaced with "-a"/"--available" command. This is due to a feature I plan for the next minor update.
+    - bugs most definitely persist in this new addition. Fixes on the way soon.
+
+  - README.md
+    - added information on the new lookup commands
+    - changed info on previous commnads listed.
 
 ---
 
