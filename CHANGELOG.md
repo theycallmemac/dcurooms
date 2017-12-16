@@ -114,6 +114,13 @@ __contributor:__ theycallmemac
   - README.md
     - added information on the new lookup commands
     - changed info on previous commnads listed.
+  
+  - setup.py
+    - added url to setup script
 
+  - tests/test_available_now.py
+    - tests the -anc options rather that the previous -fnc options.
+    - renamed file and changed some names around the test
+    - fixed issue #2
 ---
 
