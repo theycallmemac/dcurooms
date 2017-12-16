@@ -10,7 +10,7 @@ from scripts.dcurooms import build_timetable, get_current_time, check_room, main
 class AvailableNowTestCase(unittest.TestCase):
     def test_options(self):
         anc_result = os.system("cd ../scripts/ && python dcurooms.py -anc > ../tests/output.txt")
-        return self.assertTrue(free_result == 0)
+        return self.assertTrue(anc_result == 0)
 
     def test_output(self):
         if self.test_options():
