@@ -27,4 +27,7 @@ To display the information of a specific room in the Henry Grattan building at 1
 
 To look up the info of all rooms in the School of Computing at 13:00 on the Thursday of the 10th week of the college year run ```dcurooms -lc 10 4 1300``` or ```dcurooms --lookup --computing 10 4 1300```.
 
+To lookup the info of all free rooms in the Henry Grattan building at 16:00 on the Monday of the 21st week of the college year run ```dcurooms -lac 21 1 1600``` or ```dcurooms --lookup --available --computing 21 4 1600```.
+
+
 For help run ```dcurooms -h``` and for the current version run ```dcurooms --version```.

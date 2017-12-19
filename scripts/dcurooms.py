@@ -14,11 +14,19 @@ __version__ = '0.3.0'
 __copyright__ = 'Copyright (c) 2017 theycallmemac'
 __license__ = 'GPL-3.0'
 
+def search_dictionary(times, time):
+    for k,v in times.items():
+        if k == time:
+            time = v
+            break
+        else:
+            pass
+    return time
+
 def get_current_time(date):
     day = date.weekday()
     hour = date.hour
     minute = date.minute
-
     year, week_no, weekday = date.isocalendar()
     start = 36
     if week_no >= start:
@@ -42,14 +50,12 @@ def build_timetable(room, week, day, hour):
     browser.addheaders = [("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")]
     url = "https://www101.dcu.ie/timetables/feed.php?room=" + room + "&week1=" + week + "&hour=" + str(hour) + "&day=" + day + "&template=location"
     browser.open(url)
-
     return browser, url
 
 def check_room(timetable_url):
     html = get(timetable_url)
     soup = BeautifulSoup(html.text, "lxml")
     tr = soup.select('tr')
-
     return str(tr[12].getText().strip()) + " -> " + str(tr[14].getText().strip())
 
 
@@ -57,13 +63,10 @@ def main():
     parser = OptionParser(description='Displays and books rooms around the DCU campus via provided timetable/module details', prog='dcurooms', version='%prog ' + __version__, usage='%prog [option]')
     parser.add_option("-a", "--available", action="store_true", help="returns only the rooms/labs that are free in a building")
     parser.add_option("-l", "--lookup", action="store_true", help="returns information given a specific room, week, day and hour")
-
     parser.add_option("-n", "--now", action="store_true", help="show the status of each room/lab as it is at the current time of checking")
     parser.add_option("-c", "--computing", action="store_true", help="displays the status of the labs in the School of Computing")
     parser.add_option("-g", "--grattan", action="store_true", help="displays the status of rooms in the Henry Grattan building")
-
     (options, arguments) = parser.parse_args()
-
     times = {'0800':'1', 
             '0830':'2', 
             '0900':'3',
@@ -94,61 +97,58 @@ def main():
             '2130':'28', 
             '2200':'29', 
             '2230':'30'}
-
     c = ['LG25','LG26','LG27','L101','L114','L125','L128']
     g = ['CG01', 'CG02','CG03','CG04','CG05','CG06','CG11','CG12','CG20','CG68','C166']
-
     if options.lookup == True:
         details = sys.argv[2:]
         if len(details) > 5:
             sys.exit()
         elif options.computing == True:
-            week = details[0]
-            day = details[1]
-            time = details[2]
-            for k,v in times.items():
-                if k == time:
-                    time = v
-                    break
-                else:
-                    pass
-            for room in c:
-                timetable, url = build_timetable("GLA." + room, week, day, time)
-                status = check_room(url)
-                print(room + ": " + status)
-            sys.exit()
+            if options.available == True:
+                week, day, time = details[0], details[1], details[2]
+                time = search_dictionary(times, time)
+                for room in c:
+                    timetable, url = build_timetable("GLA." + room, week, day, time)
+                    status = check_room(url)
+                    if len(status) <= 9:
+                        print(room + ": " + status)
+                sys.exit()
+            else:
+                week, day, time = details[0], details[1], details[2]
+                time = search_dictionary(times, time)
+                for room in c:
+                    timetable, url = build_timetable("GLA." + room, week, day, time)
+                    status = check_room(url)
+                    print(room + ": " + status)
+                sys.exit()
         elif options.grattan == True:
-            week = details[0]
-            day = details[1]
-            time = details[2]
-            for k,v in times.items():
-                if k == time:
-                    time = v
-                    break
-                else:
-                    pass
-            for room in g:
-                timetable, url = build_timetable("GLA." + room, week, day, time)
-                status = check_room(url)
-                print(room + ": " + status)
-            sys.exit()
+            if options.available == True:
+                week, day, time = details[0], details[1], details[2]
+                time = search_dictionary(times, time)
+                for room in g:
+                    timetable, url = build_timetable("GLA." + room, week, day, time)
+                    status = check_room(url)
+                    if len(status) <= 9:
+                        print(room + ": " + status)
+                sys.exit()
+            else:
+                week, day, time = details[0], details[1], details[2]
+                time = search_dictionary(times, time)
+                for room in g:
+                    timetable, url = build_timetable("GLA." + room, week, day, time)
+                    status = check_room(url)
+                    print(room + ": " + status)
+                sys.exit()
         else:
-            room = details[0]
-            week = details[1]
-            day = details[2]
-            requested_time = details[3]
-            for k,v in times.items():
-                if k == requested_time:
-                    requested_time = v
-                    break
-                else:
-                    pass
-
-            timetable, url = build_timetable("GLA." + room, week, day, requested_time)
+            room, week, day, time = details[0], details[1], details[2], details[3]
+            if room not in c and room not in g:
+                print("That room does not exist or is not supported by this program.")
+                sys.exit()
+            time = search_dictionary(times, time)
+            timetable, url = build_timetable("GLA." + room, week, day, time)
             status = check_room(url)
             print(room + ": " + status)
             sys.exit()
-
     if options.now == True:
         week, day, hour, minute = get_current_time(datetime.datetime.now())
         if int(hour) < 8 or int(hour) >= 23:
@@ -158,36 +158,30 @@ def main():
             minute = '30'
         else:
             minute = '00'
-        current_time = hour + minute
-        for k,v in times.items():
-            if k == current_time:
-                current_time = v
-                break
-            else:
-                pass
+        time = search_dictionary(times, hour + minute)
         if options.computing == True:
             if options.available == True:
                 for room in c:
-                    timetable, url = build_timetable("GLA." + room, week, day, current_time)
+                    timetable, url = build_timetable("GLA." + room, week, day, time)
                     status = check_room(url)
                     if len(status) <= 9:
                         print(room + ": " + status)
             else:
                 for room in c:
-                    timetable, url = build_timetable("GLA." + room, week, day, current_time)
+                    timetable, url = build_timetable("GLA." + room, week, day, time)
                     status = check_room(url)
                     print(room + ": " + status)
 
         elif options.grattan == True:
             if options.available == True:
                 for room in g:
-                    timetable, url = build_timetable("GLA." + room, week, day, current_time)
+                    timetable, url = build_timetable("GLA." + room, week, day, time)
                     status = check_room(url)
                     if len(status) <= 9:
                         print(room + ": " + status)       
             else:
                 for room in g:
-                    timetable, url = build_timetable("GLA." + room, week, day, current_time)
+                    timetable, url = build_timetable("GLA." + room, week, day, time)
                     status = check_room(url)
                     print(room + ": " + status) 
         
@@ -195,6 +189,5 @@ def main():
             parser.print_help()
     else:
         parser.print_help()
-
 if __name__ == '__main__':
     main()

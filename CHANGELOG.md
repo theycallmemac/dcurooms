@@ -112,15 +112,35 @@ __contributor:__ theycallmemac
     - bugs most definitely persist in this new addition. Fixes on the way soon.
 
   - README.md
-    - added information on the new lookup commands
-    - changed info on previous commnads listed.
+    - added information on the new lookup commands.
+    - changed info on previous commands listed.
   
   - setup.py
-    - added url to setup script
+    - added url to setup script.
 
   - tests/test_available_now.py
     - tests the -anc options rather that the previous -fnc options.
-    - renamed file and changed some names around the test
+    - renamed file and changed some names around the test.
     - fixed issue #2
+---
+
+---
+
+__entry:__ 19-12-2017
+__contributor:__ theycallmemac
+
+---
+  - scripts/dcurooms.py
+    - now at v0.4.0 because of some rewrites and added functionality
+    - lookup option now supports a lookup when available option, given as "-la"/"--lookup --available"
+    - search_dictionary function added and repetitive lines of code removed.
+    - now gives error message when room entered which either doesn't exist or is not yet supported by the tool, this fixes #4
+
+  - README.md
+    - added information on the new lookup when available command
+  
+  - tests/test_available_now.py
+    - removed unnecessary lines
+    - changed information and created txt file based on new option names from v0.3.0
 ---
 
