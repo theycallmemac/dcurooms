@@ -135,7 +135,11 @@ __contributor:__ theycallmemac
     - lookup option now supports a lookup when available option, given as "-la"/"--lookup --available"
     - search_dictionary function added and repetitive lines of code removed.
     - now gives error message when room entered which either doesn't exist or is not yet supported by the tool, this fixes #4
-
+    - now at v0.4.1 due to some fixes
+    - found that issue #7 pertained to more than just what was detailed initially
+    - tool no longer returns any IndexErrors instead returns a message as to what you entered wrong.
+    - this fixes #7
+    - 
   - README.md
     - added information on the new lookup when available command
   

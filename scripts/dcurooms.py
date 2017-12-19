@@ -10,17 +10,28 @@ from requests import get
 from bs4 import BeautifulSoup
 
 __author__ = "theycallmemac"
-__version__ = '0.3.0'
+__version__ = '0.4.1'
 __copyright__ = 'Copyright (c) 2017 theycallmemac'
 __license__ = 'GPL-3.0'
 
+def check_arguments(week, day):
+    if int(week) not in range(1, 53) or int(day) not in range(1,7):
+        print("Incorrect parameters passed.")
+        sys.exit()
+    else:
+        pass
+
 def search_dictionary(times, time):
+    if time not in times:
+        print("Outside scheduled timetables. Please try again at 08:00.")
+        sys.exit()
     for k,v in times.items():
         if k == time:
             time = v
             break
         else:
             pass
+
     return time
 
 def get_current_time(date):
@@ -102,10 +113,12 @@ def main():
     if options.lookup == True:
         details = sys.argv[2:]
         if len(details) > 5:
+            print("Too many arguments passed.")
             sys.exit()
         elif options.computing == True:
             if options.available == True:
                 week, day, time = details[0], details[1], details[2]
+                check_arguments(week, day)
                 time = search_dictionary(times, time)
                 for room in c:
                     timetable, url = build_timetable("GLA." + room, week, day, time)
@@ -115,6 +128,7 @@ def main():
                 sys.exit()
             else:
                 week, day, time = details[0], details[1], details[2]
+                check_arguments(week, day)
                 time = search_dictionary(times, time)
                 for room in c:
                     timetable, url = build_timetable("GLA." + room, week, day, time)
@@ -124,6 +138,7 @@ def main():
         elif options.grattan == True:
             if options.available == True:
                 week, day, time = details[0], details[1], details[2]
+                check_arguments(week, day)
                 time = search_dictionary(times, time)
                 for room in g:
                     timetable, url = build_timetable("GLA." + room, week, day, time)
@@ -133,6 +148,7 @@ def main():
                 sys.exit()
             else:
                 week, day, time = details[0], details[1], details[2]
+                check_arguments(week, day)
                 time = search_dictionary(times, time)
                 for room in g:
                     timetable, url = build_timetable("GLA." + room, week, day, time)
@@ -140,10 +156,14 @@ def main():
                     print(room + ": " + status)
                 sys.exit()
         else:
+            if len(details) <= 3:
+                print("Not enough arguments passed.")
+                sys.exit()
             room, week, day, time = details[0], details[1], details[2], details[3]
             if room not in c and room not in g:
                 print("That room does not exist or is not supported by this program.")
                 sys.exit()
+            check_arguments(week, day)
             time = search_dictionary(times, time)
             timetable, url = build_timetable("GLA." + room, week, day, time)
             status = check_room(url)
@@ -158,6 +178,7 @@ def main():
             minute = '30'
         else:
             minute = '00'
+        check_arguments(week, day)
         time = search_dictionary(times, hour + minute)
         if options.computing == True:
             if options.available == True:
