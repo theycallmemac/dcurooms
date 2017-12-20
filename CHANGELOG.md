@@ -148,3 +148,16 @@ __contributor:__ theycallmemac
     - changed information and created txt file based on new option names from v0.3.0
 ---
 
+---
+
+__entry:__ 20-12-2017
+__contributor:__ theycallmemac
+
+---
+  - scripts/dcurooms.py
+    - now at v0.4.2
+    - Refactored script from 214 lines to 149 lines, removing large blocks of repetitive code
+    - this refactoring fixes issue #8
+
+---
+
