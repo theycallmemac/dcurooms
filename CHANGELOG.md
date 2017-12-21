@@ -161,3 +161,16 @@ __contributor:__ theycallmemac
 
 ---
 
+__entry:__ 21-12-2017
+__contributor:__ theycallmemac
+
+---
+  - scripts/dcurooms.py
+    - made dcurooms compatible with python3.x, thus closing issue #6
+    - this was done by using MechanicalSoup instead of mechanize as the former supports python2 and python3
+    - script also decides between http.cookiejar and cookielib bepending on which major version of python the script was installed with.
+
+  - setup.py
+    - included more info on the versions of python that the dcurooms script supports
+---
+
