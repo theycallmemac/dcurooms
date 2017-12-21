@@ -3,9 +3,12 @@
 
 import datetime
 import sys
+if sys.version_info[0] < 3:
+    from cookielib import LWPCookieJar
+else:
+    from http.cookiejar import LWPCookieJar
 from optparse import OptionParser
-from cookielib import LWPCookieJar
-from mechanize import Browser, _http
+from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
 
@@ -32,7 +35,7 @@ def check_arguments(week, day):
 
 def search_dictionary(times, time):
     if time not in times:
-        print("uOutside scheduled timetables. Please try again at 08:00.")
+        print("Outside scheduled timetables. Please try again at 08:00.")
         sys.exit()
     for k,v in times.items():
         if k == time:
@@ -56,15 +59,9 @@ def get_current_time(date):
     return str(week), str(day + 1), str(hour), str(minute)
 
 def build_timetable(room, week, day, hour):
-    browser = Browser()
+    browser = StatefulBrowser()
     cookie_jar = LWPCookieJar()
     browser.set_cookiejar(cookie_jar)
-    browser.set_handle_equiv(True)
-    browser.set_handle_gzip(True)
-    browser.set_handle_redirect(True)
-    browser.set_handle_referer(True)
-    browser.set_handle_robots(False)
-    browser.set_handle_refresh(_http.HTTPRefreshProcessor(), max_time=1)
     browser.addheaders = [("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")]
     url = "https://www101.dcu.ie/timetables/feed.php?room=" + room + "&week1=" + week + "&hour=" + str(hour) + "&day=" + day + "&template=location"
     browser.open(url)
