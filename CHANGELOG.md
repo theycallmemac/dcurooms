@@ -75,6 +75,7 @@ __entry:__ 14-12-2017
 __contributor:__ theycallmemac
 
 ---
+
   - .gitignore
     - created to ignore .pyc and .txt files
     - also ignores egg-info aswell as build and dist directories
@@ -104,6 +105,7 @@ __entry:__ 16-12-2017
 __contributor:__ theycallmemac
 
 ---
+
   - scripts/dcurooms.py
     - now at v0.3.0 due to some minor changes in what the tool can do and it's usage.
     - can now look up specific rooms on any given week and timeslot. 
@@ -122,6 +124,7 @@ __contributor:__ theycallmemac
     - tests the -anc options rather that the previous -fnc options.
     - renamed file and changed some names around the test.
     - fixed issue #2
+
 ---
 
 ---
@@ -130,6 +133,7 @@ __entry:__ 19-12-2017
 __contributor:__ theycallmemac
 
 ---
+
   - scripts/dcurooms.py
     - now at v0.4.0 because of some rewrites and added functionality
     - lookup option now supports a lookup when available option, given as "-la"/"--lookup --available"
@@ -146,6 +150,7 @@ __contributor:__ theycallmemac
   - tests/test_available_now.py
     - removed unnecessary lines
     - changed information and created txt file based on new option names from v0.3.0
+
 ---
 
 ---
@@ -154,6 +159,7 @@ __entry:__ 20-12-2017
 __contributor:__ theycallmemac
 
 ---
+
   - scripts/dcurooms.py
     - now at v0.4.2
     - Refactored script from 214 lines to 149 lines, removing large blocks of repetitive code
@@ -161,10 +167,13 @@ __contributor:__ theycallmemac
 
 ---
 
+---
+
 __entry:__ 21-12-2017
 __contributor:__ theycallmemac
 
 ---
+
   - scripts/dcurooms.py
     - made dcurooms compatible with python3.x, thus closing issue #6
     - this was done by using MechanicalSoup instead of mechanize as the former supports python2 and python3
@@ -172,5 +181,20 @@ __contributor:__ theycallmemac
 
   - setup.py
     - included more info on the versions of python that the dcurooms script supports
+
 ---
 
+---
+
+__entry:__ 24-12-2017
+__contributor:__ theycallmemac
+
+---
+
+  - scripts/dcurooms.py
+    - closes #3, milestone 1.0.0 reached
+    - supports the booking of rooms in the Henry Grattan Building and labs in the School of Computing.
+    - requires your gmail username and password to send lab booking on behalf of your email.
+    - supports both python2 and python3
+
+---
