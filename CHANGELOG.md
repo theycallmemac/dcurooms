@@ -198,3 +198,29 @@ __contributor:__ theycallmemac
     - supports both python2 and python3
 
 ---
+---
+
+__entry:__ 25-12-2017
+__contributor:__ theycallmemac
+
+---
+
+  - scripts/dcurooms.py
+    - fixed some errors persisting within the booking code, incorrect parameters etc
+
+  - tests/test_available_now.py
+    - made changes to test, giving exit status of 0 rather than 1.
+    - now run from projects home dir rather from within the test dir
+    - this is for the purposes of TravisCI
+    
+  - .travis.yml
+    - added continuous integration in the from of TravisCI
+    - sets python as the language, building for 3.4, 3.5 and 3.6 only
+    - installs requirements using the txt file found in the home dir
+    - runs tests
+    - hope to build for 2.7 soon
+
+  - requirements.txt
+    dependencies used by dcurooms to be installed using TravisCI
+
+---
