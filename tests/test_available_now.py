@@ -8,7 +8,7 @@ sys.path.append('../')
 
 class AvailableNowTestCase(unittest.TestCase):
     def test_options(self):
-        available_result = os.system("cd ../scripts/ && python3 dcurooms.py -anC > ../tests/available_output.txt")
+        available_result = os.system("cd scripts/ && python3 dcurooms.py -anC > ../tests/available_output.txt")
         return self.assertTrue(available_result == 0)
 
     def test_available_output(self):
