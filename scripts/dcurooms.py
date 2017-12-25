@@ -1,20 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import datetime
 import sys
-import smtplib
 if sys.version_info[0] < 3:
     from cookielib import LWPCookieJar
 else:
     from http.cookiejar import LWPCookieJar
+import datetime
+import smtplib
 from optparse import OptionParser
 from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
 
 __author__ = "theycallmemac"
-__version__ = '0.4.2'
+__version__ = '1.0.0'
 __copyright__ = 'Copyright (c) 2017 theycallmemac'
 __license__ = 'GPL-3.0'
 
@@ -84,7 +84,7 @@ def fill_form(args):
         number = raw_input("Your number: ")
     else:
         name = input("Name of society: ")
-        person = (input("Your name: ")
+        person = input("Your name: ")
         email = input("Your email: ")
         number = input("Your number: ")
     browser.open("http://www.dcu.ie/registry/booking.shtml")
@@ -100,7 +100,6 @@ def fill_form(args):
     browser["submitted[hours_requiredfrom_to]"] = from_time + " - " + to_time
     browser["submitted[building_room_reference]"] = room
     browser["submitted[email_address]"] = email
-
     return browser
 
 def check_room(timetable_url):
@@ -131,7 +130,6 @@ def draft_email(args):
     BODY = "Just wondering if you could book " + args[0] + " on the " + args[1] + " from " + args[2][:2] + ":" + args[2][2:] + " to " + args[3][:2] + ":" + args[3][2:] + " for " + name + ".\n\nThank you,\n" + person + "."
     message = """From: %s\nTo: %s\nSubject: %s\n\n%s
     """ % (FROM, ", ".join(TO), SUBJECT, BODY)
-
     return gmail_user, gmail_password, FROM, TO, message
 
 def send_email(gmail_user, gmail_password, FROM, TO, message):
