@@ -15,7 +15,7 @@ cd into the clone and run ```python setup.py install``` as root to install.
 
 ### Dependencies
  - bs4
- - mechanize
+ - MechanicalSoup
  - requests
 
 
