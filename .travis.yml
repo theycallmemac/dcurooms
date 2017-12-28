@@ -1,5 +1,6 @@
 language: python
 python:
+    - "2.7"
     - "3.4"
     - "3.5"
     - "3.6"
@@ -8,3 +9,6 @@ install:
 
 script:
     - python tests/test_available_now.py
+
+notifications:
+    email: false
