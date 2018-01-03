@@ -236,8 +236,14 @@ __contributor:__ theycallmemac
     - tests the return value of the build_timetable function in dcurooms.py
     - also tests the validity of the url built
 
+  - tests/test_lookup.py
+    - created test_lookup.py
+    - tests the output of an incorrect entry
+    - also checks the output is nothing when the room is indeed free
+
   - .travis.yml
     - added new test_builder.py test to scripts section
+    - added new test_lookup.py test too
 
 ---
     
