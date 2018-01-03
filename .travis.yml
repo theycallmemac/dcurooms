@@ -9,6 +9,7 @@ install:
 
 script:
     - python tests/test_available_now.py
+    - python tests/test_builder.py
 
 notifications:
     email: false

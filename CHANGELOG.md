@@ -224,3 +224,21 @@ __contributor:__ theycallmemac
     dependencies used by dcurooms to be installed using TravisCI
 
 ---
+---
+
+__entry:__ 03-01-2018
+__contributor:__ theycallmemac
+
+---
+
+  - tests/test_builder.py
+    - created test_builder.py
+    - tests the return value of the build_timetable function in dcurooms.py
+    - also tests the validity of the url built
+
+  - .travis.yml
+    - added new test_builder.py test to scripts section
+
+---
+    
+
