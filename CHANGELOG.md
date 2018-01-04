@@ -246,5 +246,15 @@ __contributor:__ theycallmemac
     - added new test_lookup.py test too
 
 ---
-    
+---
 
+__entry:__ 04-01-2018
+__contributor:__ theycallmemac
+
+---
+
+  - setup.py, scripts/dcurooms.py, tests/test_lookup.py, tests/test_available_now.py, tests/test_builder.py
+    - all scripts named here were formatted to conform with pep8
+    - this was done using autopep8
+
+---

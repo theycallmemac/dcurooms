@@ -1,9 +1,9 @@
-
 import unittest
 import sys
 import requests
 sys.path.append('.')
 from scripts.dcurooms import build_timetable
+
 class BuildTimetableTestCase(unittest.TestCase):
     def test_return_val(self):
         val = build_timetable("CG04", "24", "14", "4")
