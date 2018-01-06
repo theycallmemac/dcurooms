@@ -11,6 +11,7 @@ script:
     - python tests/test_available_now.py
     - python tests/test_lookup.py
     - python tests/test_builder.py
+    - python tests/test_search_dict.py
 
 notifications:
     email: false
