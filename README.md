@@ -1,6 +1,6 @@
 # dcurooms
 
-![TravisCI Status](https://travis-ci.org/theycallmemac/dcurooms.svg?branch=master) [![GitHub license](https://img.shields.io/github/license/theycallmemac/dcurooms.svg)](https://github.com/theycallmemac/dcurooms/blob/master/LICENSE) [![Maintainability](https://api.codeclimate.com/v1/badges/d41179565d12397e7438/maintainability)](https://codeclimate.com/github/theycallmemac/dcurooms/maintainability)
+![TravisCI Status](https://travis-ci.org/theycallmemac/dcurooms.svg?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/d41179565d12397e7438/maintainability)](https://codeclimate.com/github/theycallmemac/dcurooms/maintainability) [![GitHub license](https://img.shields.io/github/license/theycallmemac/dcurooms.svg)](https://github.com/theycallmemac/dcurooms/blob/master/LICENSE)
 
 ### Description
 This is a command line tool I hope to develop overtime. In time it will be able to support the booking of rooms on the DCU Glasnevin Campus. Along with this, it will be able to display room timetables information as well as be able to check the availability of a room in a few different ways.
