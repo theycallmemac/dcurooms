@@ -8,7 +8,7 @@ setup(name='dcurooms',
       author='theycallmemac',
       url='https://github.com/theycallmemac/dcurooms',
       license='GPL-3.0',
-      scripts=['scripts/dcurooms', 'scripts/dcurooms.py'],
+      scripts=['scripts/dcurooms', 'scripts/index.py', 'scripts/controls.py', 'scripts/builders.py', 'scripts/checks.py'],
       install_requires=[
           'MechanicalSoup', 'bs4', 'requests'
       ],

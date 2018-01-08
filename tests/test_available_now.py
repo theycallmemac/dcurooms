@@ -2,12 +2,12 @@ import unittest
 import sys
 import datetime
 import os
-sys.path.append('../')
+sys.path.append('.')
 
 
 class AvailableNowTestCase(unittest.TestCase):
     def test_options(self):
-        available_result = os.system("""cd scripts/ && python dcurooms.py -anC
+        available_result = os.system("""cd scripts/ && python dcurooms -anC
                                      > ../tests/available_output.txt""")
         self.assertTrue(available_result == 0)
 

@@ -2,7 +2,7 @@ import unittest
 import sys
 import requests
 sys.path.append('.')
-from scripts.dcurooms import search_dictionary
+from scripts.checks import search_dictionary
 
 class SearchDictTestCase(unittest.TestCase):
 

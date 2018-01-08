@@ -2,16 +2,15 @@ import unittest
 import sys
 import datetime
 import os
-sys.path.append('../')
-
+sys.path.append('.')
 
 class LookupTestCase(unittest.TestCase):
     def test_options(self):
         room_result = os.system("""cd scripts/ &&
-                                python dcurooms.py -l CG12 21 1 1800
+                                python dcurooms -l CG12 21 1 1800
                                 > ../tests/lookup_room_output.txt""")
         building_result = os.system("""cd scripts/ &&
-                                    python dcurooms.py -lL 9 4 1500
+                                    python dcurooms -lL 9 4 1500
                                     > ../tests/lookup_building_output.txt""")
 
         self.assertTrue(room_result == 0)

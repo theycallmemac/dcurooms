@@ -1,6 +1,6 @@
-import dcurooms
+import index
 
 __version__ = '1.0.0'
 __author__ = 'theycallmemac'
 
-dcurooms.main()
+index.main()
