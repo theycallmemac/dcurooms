@@ -258,3 +258,20 @@ __contributor:__ theycallmemac
     - this was done using autopep8
 
 ---
+---
+
+__entry:__ 07-01-2018
+__contributor:__ theycallmemac
+
+---
+  - setup.py
+    - added extra scripts for running tool
+  - .travis.tml
+    - removed old test
+  - index.py, builders.py, controls.py, checks.py
+    - split functions among different files. 
+    - Fixes almost all issues found using codeclimate
+    - much cleaner (in ways), but can be better, I hope to added some more tests following on from this.
+  - README.md
+    - added codeclimate staus badge
+---
