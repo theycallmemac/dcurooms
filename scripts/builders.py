@@ -99,8 +99,9 @@ def draft_email(args):
     """ % (FROM, ", ".join(TO), SUBJECT, BODY)
     return gmail_user, gmail_password, FROM, TO, message
 
-def send_email(gmail_user, gmail_password, FROM, TO, message):
+def send_email(gmail_credentials, FROM, TO, message):
     try:
+        gmail_user, gmail_password = gmail_credentials[0], gmail_credentials[1]	
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.ehlo()
         server.starttls()

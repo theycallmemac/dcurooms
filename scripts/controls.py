@@ -22,25 +22,32 @@ __version__ = '1.0.0'
 __copyright__ = 'Copyright (c) 2017 theycallmemac'
 __license__ = 'GPL-3.0'
 
+def run_loop(lst, options, details):
+    week, day, time = details[0:3]
+    for room in lst:
+        timetable, url = builders.build_timetable("GLA." + room, week, day, time)
+        status = checks.check_room(url)
+        if options.available:
+            if len(status) <= 9:
+                print(room + ": " + status)
+        else:
+            print(room + ": " + status)
+
+
 def booking_control(c, g, details):
     if details[0] in c:
-        user, password, from_who, to_who, message = draft_email(
-                details)
+        creds = []
+        user, password, from_who, to_who, message = builders.draft_email(details)
+        creds = [user, password]
         conf = checks.get_confirmation()
         if conf == "y":
-            builders.send_email(user, password, from_who, to_who, message)
+            builders.send_email(creds, from_who, to_who, message)
         else:
             print("Draft withdrawn.")
             sys.exit()
-
     elif details[0] in g:
         form = builders.fill_form(details)
-        if sys.version_info[0] < 3:
-            conf = raw_input(
-                "\nIs this the correct information? (y/n): ").lower()
-        else:
-            conf = input(
-                "\nIs this the correct information? (y/n): ").lower()
+        conf = checks.get_confirmation()
         if conf == "y":
             room_booked = builders.make_booking(form)
             print(room_booked)
@@ -55,8 +62,8 @@ def lookup_room_control(g, c, details, times):
     if len(details) <= 3:
         print("Not enough arguments passed.")
         sys.exit()
-    room, week = details[0], details[1]
-    day, time = details[2], details[3]
+    room, week = details[0:2]
+    day, time = details[2:4]
     if room not in g and room not in c:
         print("That room is not supported by this program.")
         sys.exit()
@@ -68,22 +75,15 @@ def lookup_room_control(g, c, details, times):
     sys.exit()
 
 def lookup_building_control(options, lst, details, times):
-    week, day, time = details[0], details[1], details[2]
+    week, day, time = details[0:3]
     checks.check_arguments(week, day)
     time = checks.search_dictionary(times, time)
-    for room in lst:
-        timetable, url = builders.build_timetable("GLA." + room, week, day, time)
-        status = checks.check_room(url)
-        if options.available:
-            if len(status) <= 9:
-                print(room + ": " + status)
-        else:
-            print(room + ": " + status)
+    details =[week, day, time]
+    run_loop(lst, options, details)
     sys.exit()
 
 def available_now_control(options, lst, times):
     week, day, hour, minute = checks.get_current_time(datetime.datetime.now())
-
     if int(hour) < 8 or int(hour) >= 23:
         print("Outside scheduled timetables. Try again at 08:00.")
         sys.exit()
@@ -93,14 +93,8 @@ def available_now_control(options, lst, times):
         minute = '00'
     checks.check_arguments(int(week), int(day))
     time = checks.search_dictionary(times, hour + minute)
-    for room in lst:
-        timetable, url = builders.build_timetable("GLA." + room, week, day, time)
-        status = checks.check_room(url)
-        if options.available:
-            if len(status) <= 9:
-                print(room + ": " + status)
-        else:
-            print(room + ": " + status)
+    details = [week, day, time]    
+    run_loop(lst, options, details)    
     sys.exit()
 
 
