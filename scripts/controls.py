@@ -10,8 +10,8 @@ from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
 sys.path.append('.')
-from builders import *
-from checks import *
+from scripts import builders
+from scripts import checks
 if sys.version_info[0] < 3:
     from cookielib import LWPCookieJar
 else:
@@ -26,15 +26,15 @@ def booking_control(c, g, details):
     if details[0] in c:
         user, password, from_who, to_who, message = draft_email(
                 details)
-        conf = get_confirmation()
+        conf = checks.get_confirmation()
         if conf == "y":
-            send_email(user, password, from_who, to_who, message)
+            builders.send_email(user, password, from_who, to_who, message)
         else:
             print("Draft withdrawn.")
             sys.exit()
 
     elif details[0] in g:
-        form = fill_form(details)
+        form = builders.fill_form(details)
         if sys.version_info[0] < 3:
             conf = raw_input(
                 "\nIs this the correct information? (y/n): ").lower()
@@ -42,7 +42,7 @@ def booking_control(c, g, details):
             conf = input(
                 "\nIs this the correct information? (y/n): ").lower()
         if conf == "y":
-            room_booked = make_booking(form)
+            room_booked = builders.make_booking(form)
             print(room_booked)
         else:
             print("Form submission withdrawn.")
@@ -60,20 +60,20 @@ def lookup_room_control(g, c, details, times):
     if room not in g and room not in c:
         print("That room is not supported by this program.")
         sys.exit()
-    check_arguments(week, day)
-    time = search_dictionary(times, time)
-    timetable, url = build_timetable("GLA." + room, week, day, time)
-    status = check_room(url)
+    checks.check_arguments(week, day)
+    time = checks.search_dictionary(times, time)
+    timetable, url = builders.build_timetable("GLA." + room, week, day, time)
+    status = checks.check_room(url)
     print(room + ": " + status)
     sys.exit()
 
 def lookup_building_control(options, lst, details, times):
     week, day, time = details[0], details[1], details[2]
-    check_arguments(week, day)
-    time = search_dictionary(times, time)
+    checks.check_arguments(week, day)
+    time = checks.search_dictionary(times, time)
     for room in lst:
-        timetable, url = build_timetable("GLA." + room, week, day, time)
-        status = check_room(url)
+        timetable, url = builders.build_timetable("GLA." + room, week, day, time)
+        status = checks.check_room(url)
         if options.available:
             if len(status) <= 9:
                 print(room + ": " + status)
@@ -82,7 +82,7 @@ def lookup_building_control(options, lst, details, times):
     sys.exit()
 
 def available_now_control(options, lst, times):
-    week, day, hour, minute = get_current_time(datetime.datetime.now())
+    week, day, hour, minute = checks.get_current_time(datetime.datetime.now())
 
     if int(hour) < 8 or int(hour) >= 23:
         print("Outside scheduled timetables. Try again at 08:00.")
@@ -91,11 +91,11 @@ def available_now_control(options, lst, times):
         minute = '30'
     else:
         minute = '00'
-    check_arguments(int(week), int(day))
-    time = search_dictionary(times, hour + minute)
+    checks.check_arguments(int(week), int(day))
+    time = checks.search_dictionary(times, hour + minute)
     for room in lst:
-        timetable, url = build_timetable("GLA." + room, week, day, time)
-        status = check_room(url)
+        timetable, url = builders.build_timetable("GLA." + room, week, day, time)
+        status = checks.check_room(url)
         if options.available:
             if len(status) <= 9:
                 print(room + ": " + status)

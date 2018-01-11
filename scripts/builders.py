@@ -10,8 +10,6 @@ from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
 sys.path.append('.')
-
-from checks import *
 if sys.version_info[0] < 3:
     from cookielib import LWPCookieJar
 else:
@@ -76,8 +74,6 @@ def make_booking(form):
     request = form.request
     response = form.submit_selected()
     return "Form submitted successfully."
-
-
 
 
 def draft_email(args):

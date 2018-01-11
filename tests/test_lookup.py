@@ -3,13 +3,13 @@ import sys
 import datetime
 import os
 sys.path.append('.')
-
+from scripts import index
 class LookupTestCase(unittest.TestCase):
     def test_options(self):
-        room_result = os.system("""cd scripts/ &&
+        room_result = os.system("""cd scripts &&
                                 python dcurooms -l CG12 21 1 1800
                                 > ../tests/lookup_room_output.txt""")
-        building_result = os.system("""cd scripts/ &&
+        building_result = os.system("""cd scripts &&
                                     python dcurooms -lL 9 4 1500
                                     > ../tests/lookup_building_output.txt""")
 

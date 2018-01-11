@@ -9,8 +9,8 @@ from optparse import OptionParser
 from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
-sys.path.append('.')
-from controls import *
+sys.path.append(".")
+from scripts import controls
 if sys.version_info[0] < 3:
     from cookielib import LWPCookieJar
 else:
@@ -66,7 +66,7 @@ def main():
     (options, arguments) = parser.parse_args()
     times, c, g, details = {'0800': '1', '0830': '2', '0900': '3', '0930': '4', '1000': '5', '1030': '6', '1100': '7', '1130': '8', '1200': '9', '1230': '10', '1300': '11', '1330': '12', '1400': '13','1430': '14', '1500': '15', '1530': '16', '1600': '17', '1630': '18', '1700': '19', '1730': '20', '1800': '21', '1830': '22', '1900': '23', '1930': '24', '2000': '25', '2030': '26', '2100': '27', '2130': '28', '2200': '29', '2230': '30'}, ['LG25', 'LG26', 'LG27', 'L101', 'L114', 'L125', 'L128'], ['CG01', 'CG02', 'CG03', 'CG04', 'CG05', 'CG06', 'CG11', 'CG12', 'CG20', 'CG68', 'C166'], sys.argv[2:]
     if options.book:
-        print("Booking requires more arguments. See the help for details.") if len(details) < 4 else booking_control(c, g, details)
+        print("Booking requires more arguments. See the help for details.") if len(details) < 4 else controls.booking_control(c, g, details)
         sys.exit()
     elif len(details) > 5:    
         print("Too many arguments passed.") 
@@ -74,12 +74,12 @@ def main():
         if options.computing: lst = c
         elif options.grattan: lst = g
         else:
-            lookup_room_control(g, c, details, times)
-        lookup_building_control(options, lst, details, times)
+            controls.lookup_room_control(g, c, details, times)
+        controls.lookup_building_control(options, lst, details, times)
     elif options.now:
         if options.computing: lst = c
         elif options.grattan: lst = g
-        available_now_control(options, lst, times) 
+        controls.available_now_control(options, lst, times) 
     else:
         parser.print_help()
 if __name__ == '__main__':

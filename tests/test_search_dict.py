@@ -3,7 +3,7 @@ import sys
 import requests
 sys.path.append('.')
 from scripts.checks import search_dictionary
-
+from scripts.builders import build_timetable
 class SearchDictTestCase(unittest.TestCase):
 
     def test_not_in_dict_search(self):
