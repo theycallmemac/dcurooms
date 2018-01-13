@@ -87,14 +87,13 @@ def main():
     parser, (options, arguments), times, c, g, details = required()
     if options.book:
         booking_option(c, g, details)
-    elif len(details) > 5:    
+    if len(details) > 5:    
         print("Too many arguments passed.") 
     elif options.lookup:
         lookup_option(options, (c, g), details, times)
     elif options.now:
         now_option(options, c, g, times)
-    else:
-        parser.print_help()
+    parser.print_help()
 if __name__ == '__main__':
     main()
 
