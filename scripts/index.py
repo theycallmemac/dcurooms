@@ -77,10 +77,14 @@ def now_option(options, c, g, times):
     lst = get_lst(c, g, options)
     controls.available_now_control(options, lst, times)
     
-def main():
+def required():
     parser = setup_options()
     (options, arguments) = parser.parse_args()
     times, c, g, details = get_data()
+    return parser, (options, arguments), times, c, g, details
+
+def main():
+    parser, (options, arguments), times, c, g, details = required()
     if options.book:
         booking_option(c, g, details)
     elif len(details) > 5:    
