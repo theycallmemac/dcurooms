@@ -22,13 +22,16 @@ __version__ = '1.0.0'
 __copyright__ = 'Copyright (c) 2017 theycallmemac'
 __license__ = 'GPL-3.0'
 
+def get_statuses(status, options, room):
+    if options.available and len(status) <= 9: print(room + ": " + status)
+    else: print(room + ": " + status)
+        
 def run_loop(lst, options, details):
     week, day, time = details[0:3]
     for room in lst:
         timetable, url = builders.build_timetable("GLA." + room, week, day, time)
         status = checks.check_room(url)
-        if options.available and len(status) <= 9: print(room + ": " + status)
-        else: print(room + ": " + status)
+        get_statuses(status, options, room)
 
 
 def booking_control(c, g, details):
