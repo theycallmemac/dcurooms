@@ -25,39 +25,26 @@ __license__ = 'GPL-3.0'
 def setup_options():
     parser = OptionParser(
         description='Displays info and books room around DCU.',
-        prog='dcurooms',
-        version='%prog ' + __version__,
+        prog='dcurooms', version='%prog ' + __version__,
         usage='%prog [option]')
     parser.add_option(
-        "-l",
-        "--lookup",
-        action="store_true",
+        "-l", "--lookup", action="store_true",
         help="returns information given a specific room, week, day and hour")
     parser.add_option(
-        "-b",
-        "--book",
-        action="store_true",
+        "-b", "--book", action="store_true",
         help="books a room by providing the room, D/M/YYYY, start, and end")
     parser.add_option(
-        "-a",
-        "--available",
-        action="store_true",
+        "-a", "--available", action="store_true",
         help="returns only the rooms/labs that are free in a building")
     parser.add_option(
-        "-n",
-        "--now",
-        action="store_true",
+        "-n", "--now", action="store_true",
         help="show the status of each room/lab as it is currently")
     # building options which can be passed
     parser.add_option(
-        "-L",
-        "--computing",
-        action="store_true",
+        "-L", "--computing", action="store_true",
         help="displays the status of the labs in the School of Computing")
     parser.add_option(
-        "-C",
-        "--grattan",
-        action="store_true",
+        "-C", "--grattan", action="store_true",
         help="displays the status of rooms in the Henry Grattan building")
     return parser
 

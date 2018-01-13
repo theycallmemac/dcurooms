@@ -26,6 +26,18 @@ def check_arguments(week, day):
         sys.exit()
     else:
         pass
+def check_version():
+    if sys.version_info[0] < 3: 
+        name = raw_input("Name of society: ")
+        person = raw_input("Your name: ")
+        email = raw_input("Your email: ")
+        number = raw_input("Your number: ")
+    else:
+        name = input("Name of society: ")
+        person = input("Your name: ")
+        email = input("Your email: ")
+        number = input("Your number: ")
+    return name, person, email, number
 
 def search_dictionary(times, time):
     if time not in times:

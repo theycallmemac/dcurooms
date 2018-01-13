@@ -38,22 +38,11 @@ def build_timetable(room, week, day, hour):
 
 
 def fill_form(args):
-    browser = StatefulBrowser()
-    cookie_jar = LWPCookieJar()
+    browser, cookiejar = StatefulBrowser(), LWPCookieJar()
     browser.set_cookiejar(cookie_jar)
-    room, date, from_time, to_time = args[0], args[1].split(
-        "/"), args[2][:2] + ":" + args[2][2:], args[3][:2] + ":" + args[3][2:]
-    day, month, year = date[0], date[1], date[2]
-    if sys.version_info[0] < 3:
-        name = raw_input("Name of society: ")
-        person = raw_input("Your name: ")
-        email = raw_input("Your email: ")
-        number = raw_input("Your number: ")
-    else:
-        name = input("Name of society: ")
-        person = input("Your name: ")
-        email = input("Your email: ")
-        number = input("Your number: ")
+    room, date, from_time, to_time = args[0], args[1].split("/"), args[2][:2] + ":" + args[2][2:], args[3][:2] + ":" + args[3][2:]
+    day, month, year = date[0], date[1], date[2
+    name, person, email, number = checks.check_version()
     browser.open("http://www.dcu.ie/registry/booking.shtml")
     browser.select_form(nr=2)
     browser["submitted[name_of_club_society]"] = name
