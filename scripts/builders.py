@@ -41,7 +41,7 @@ def fill_form(args):
     browser, cookiejar = StatefulBrowser(), LWPCookieJar()
     browser.set_cookiejar(cookie_jar)
     room, date, from_time, to_time = args[0], args[1].split("/"), args[2][:2] + ":" + args[2][2:], args[3][:2] + ":" + args[3][2:]
-    day, month, year = date[0], date[1], date[2
+    day, month, year = date[0], date[1], date[2]
     name, person, email, number = checks.check_version()
     browser.open("http://www.dcu.ie/registry/booking.shtml")
     browser.select_form(nr=2)
