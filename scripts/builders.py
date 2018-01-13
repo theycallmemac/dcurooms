@@ -42,7 +42,7 @@ def fill_form(args):
     browser.set_cookiejar(cookie_jar)
     room, date, from_time, to_time = args[0], args[1].split("/"), args[2][:2] + ":" + args[2][2:], args[3][:2] + ":" + args[3][2:]
     day, month, year = date[0], date[1], date[2]
-    name, person, email, number = checks.check_version()
+    name, person, email, number = checks.check_version("form")
     browser.open("http://www.dcu.ie/registry/booking.shtml")
     browser.select_form(nr=2)
     browser["submitted[name_of_club_society]"] = name
@@ -66,16 +66,7 @@ def make_booking(form):
 
 
 def draft_email(args):
-    if sys.version_info[0] < 3:
-        gmail_user = raw_input("Your gmail: ")
-        gmail_password = raw_input("Your gmail password: ")
-        name = raw_input("Society name: ")
-        person = raw_input("Your name: ")
-    else:
-        gmail_user = input("Your gmail: ")
-        gmail_password = input("Your gmail password: ")
-        name = input("Society name: ")
-        person = input("Your name: ")
+    gmail_user, gmail_password, name, person = checks.check_version("email")
     FROM = gmail_user
     TO = ['irene.mcevoy@dcu.ie']
     SUBJECT = 'Lab Booking'

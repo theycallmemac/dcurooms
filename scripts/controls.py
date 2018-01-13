@@ -28,8 +28,7 @@ def run_loop(lst, options, details):
         timetable, url = builders.build_timetable("GLA." + room, week, day, time)
         status = checks.check_room(url)
         if options.available:
-            if len(status) <= 9:
-                print(room + ": " + status)
+            print(room + ": " + status) if len(status) <= 9:
         else:
             print(room + ": " + status)
 
