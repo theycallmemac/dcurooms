@@ -64,7 +64,8 @@ def opt_is_room(options, rooms, details, times):
     else:
         controls.lookup_room_control(g, c, details, times)
 
-def booking_option(c, g, details):
+def booking_option(rooms details):
+    c, g = rooms[0:2]
     print("Booking requires more arguments. See the help for details.") if len(details) < 4 else controls.booking_control(c, g, details)
     sys.exit()
     
@@ -73,7 +74,8 @@ def lookup_option(options, rooms, details, times):
     lst = get_lst(rooms[0], rooms[1], options)
     controls.lookup_building_control(options, lst, details, times)
     
-def now_option(options, c, g, times):
+def now_option(options, rooms, times):
+    c, g = rooms[0:2]
     lst = get_lst(c, g, options)
     controls.available_now_control(options, lst, times)
     
@@ -81,17 +83,22 @@ def required():
     parser = setup_options()
     (options, arguments) = parser.parse_args()
     times, c, g, details = get_data()
-    return parser, (options, arguments), times, c, g, details
+    return parser, (options, arguments), (c, g), (times, details)
 
-def main():
-    parser, (options, arguments), times, c, g, details = required()
+
+def flow(options, parser, rooms, info):
+    times, details = info[0:2]
     if options.book and len(details) < 5:
-        booking_option(c, g, details)
+        booking_option(rooms, details)
     elif options.lookup:
-        lookup_option(options, (c, g), details, times)
+        lookup_option(options, rooms, details, times)
     elif options.now:
-        now_option(options, c, g, times)
+        now_option(options, rooms, times)
     parser.print_help()
+    
+def main():
+    parser, (options, arguments), rooms, info = required()
+    flow(options, parser, rooms, info)
 if __name__ == '__main__':
     main()
 
