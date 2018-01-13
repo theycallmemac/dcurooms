@@ -26,32 +26,38 @@ def check_arguments(week, day):
         sys.exit()
     else:
         pass
+def email_version():
+    if sys.version_info[0] < 3:
+        gmail_user = raw_input("Your gmail: ")
+        gmail_password = raw_input("Your gmail password: ")
+        name = raw_input("Society name: ")
+        person = raw_input("Your name: ")
+    else:
+        gmail_user = input("Your gmail: ")
+        gmail_password = input("Your gmail password: ")
+        name = input("Society name: ")
+        person = input("Your name: ")
+    return gmail_user, gmail_password, name, person
+
+def form_version():
+    if sys.version_info[0] < 3: 
+        name = raw_input("Name of society: ")
+        person = raw_input("Your name: ")
+        email = raw_input("Your email: ")
+        number = raw_input("Your number: ")
+    else:
+        name = input("Name of society: ")
+        person = input("Your name: ")
+        email = input("Your email: ")
+        number = input("Your number: ")
+    return name, person, email, number
+
 def check_version(func):
     if func == "email":
-        if sys.version_info[0] < 3:
-            gmail_user = raw_input("Your gmail: ")
-            gmail_password = raw_input("Your gmail password: ")
-            name = raw_input("Society name: ")
-            person = raw_input("Your name: ")
-        else:
-            gmail_user = input("Your gmail: ")
-            gmail_password = input("Your gmail password: ")
-            name = input("Society name: ")
-            person = input("Your name: ")
-        return gmail_user, gmail_password, name, person
-
+        return email_version()
     if func =="form":
-        if sys.version_info[0] < 3: 
-            name = raw_input("Name of society: ")
-            person = raw_input("Your name: ")
-            email = raw_input("Your email: ")
-            number = raw_input("Your number: ")
-        else:
-            name = input("Name of society: ")
-            person = input("Your name: ")
-            email = input("Your email: ")
-            number = input("Your number: ")
-        return name, person, email, number
+        return form_version()
+
 
 def search_dictionary(times, time):
     if time not in times:
