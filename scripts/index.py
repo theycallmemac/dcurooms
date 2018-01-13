@@ -64,21 +64,31 @@ def opt_is_room(options, rooms, details, times):
     else:
         controls.lookup_room_control(g, c, details, times)
 
+def booking_option(c, g, details):
+    print("Booking requires more arguments. See the help for details.") if len(details) < 4 else controls.booking_control(c, g, details)
+    sys.exit()
+    
+def lookup_option(options, rooms, details, times):
+    opt_is_room(options, rooms, details, times)
+    lst = get_lst(rooms[0], rooms[1], options)
+    controls.lookup_building_control(options, lst, details, times)
+    
+def now_option(options, c, g, times):
+    lst = get_lst(c, g, options)
+    controls.available_now_control(options, lst, times)
+    
 def main():
     parser = setup_options()
     (options, arguments) = parser.parse_args()
     times, c, g, details = get_data()
     if options.book:
-        print("Booking requires more arguments. See the help for details.") if len(details) < 4 else controls.booking_control(c, g, details)
-        sys.exit()
+        booking_option(c, g, details)
     elif len(details) > 5:    
         print("Too many arguments passed.") 
     elif options.lookup:
-        opt_is_room(options, (c, g), details, times)
-        controls.lookup_building_control(options, lst, details, times)
+        lookup_option(options, (c, g), details, times)
     elif options.now:
-        lst = get_lst(c, g, options)
-        controls.available_now_control(options, lst, times) 
+        now_option(options, c, g, times)
     else:
         parser.print_help()
 if __name__ == '__main__':
