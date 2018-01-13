@@ -85,9 +85,9 @@ def required():
 
 def main():
     parser, (options, arguments), times, c, g, details = required()
-    booking_option(c, g, details) if options.book else print("")
-    print("Too many arguments passed.") if len(details < 4) else print("")
-    if options.lookup:
+    if options.book and len(details) < 5:
+        booking_option(c, g, details)
+    elif options.lookup:
         lookup_option(options, (c, g), details, times)
     elif options.now:
         now_option(options, c, g, times)
