@@ -33,27 +33,32 @@ def run_loop(lst, options, details):
         status = checks.check_room(url)
         get_statuses(status, options, room)
 
+def book_grattan():
+    form = builders.fill_form(details)
+    conf = checks.get_confirmation()
+    if conf == "y":
+        room_booked = builders.make_booking(form)
+        print(room_booked)
+    else:
+        print("Form submission withdrawn.")
+    sys.exit()
+        
+def book_computing():
+    creds = []
+    user, password, from_who, to_who, message = builders.draft_email(details)
+    creds = [user, password]
+    conf = checks.get_confirmation()
+    if conf == "y":
+        builders.send_email(creds, from_who, to_who, message)
+    else:
+        print("Draft withdrawn.")
+    sys.exit()
 
 def booking_control(c, g, details):
     if details[0] in c:
-        creds = []
-        user, password, from_who, to_who, message = builders.draft_email(details)
-        creds = [user, password]
-        conf = checks.get_confirmation()
-        if conf == "y":
-            builders.send_email(creds, from_who, to_who, message)
-        else:
-            print("Draft withdrawn.")
-            sys.exit()
+        book_computing(details)
     elif details[0] in g:
-        form = builders.fill_form(details)
-        conf = checks.get_confirmation()
-        if conf == "y":
-            room_booked = builders.make_booking(form)
-            print(room_booked)
-        else:
-            print("Form submission withdrawn.")
-            sys.exit()
+        book_grattan(details)
     else:
         print("That room is not supported by this tool.")
         sys.exit()
