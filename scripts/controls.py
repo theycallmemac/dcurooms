@@ -27,7 +27,8 @@ def run_loop(lst, options, details):
     for room in lst:
         timetable, url = builders.build_timetable("GLA." + room, week, day, time)
         status = checks.check_room(url)
-        print(room + ": " + status) if options.available and len(status) <= 9 else print(room + ": " + status)
+        if options.available and len(status) <= 9: print(room + ": " + status)
+        else: print(room + ": " + status)
 
 
 def booking_control(c, g, details):
