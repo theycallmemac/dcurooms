@@ -64,7 +64,7 @@ def opt_is_room(options, rooms, details, times):
     else:
         controls.lookup_room_control(g, c, details, times)
 
-def booking_option(rooms details):
+def booking_option(rooms, details):
     c, g = rooms[0:2]
     print("Booking requires more arguments. See the help for details.") if len(details) < 4 else controls.booking_control(c, g, details)
     sys.exit()
