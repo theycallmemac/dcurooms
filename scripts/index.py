@@ -86,7 +86,7 @@ def required():
     return parser, (options, arguments), (c, g), (times, details)
 
 
-def flow(options, parser, rooms, info):
+def flow(options, rooms, info):
     times, details = info[0:2]
     if options.book and len(details) < 5:
         booking_option(rooms, details)
@@ -97,7 +97,7 @@ def flow(options, parser, rooms, info):
     
 def main():
     parser, (options, arguments), rooms, info = required()
-    flow(options, parser, rooms, info)
+    flow(options, rooms, info)
     parser.print_help()
 if __name__ == '__main__':
     main()
