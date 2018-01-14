@@ -90,7 +90,8 @@ def flow(options, rooms, info):
     times, details = info[0:2]
     if options.book and len(details) < 5:
         booking_option(rooms, details)
-    elif options.lookup:
+    
+    if options.lookup:
         lookup_option(options, rooms, details, times)
     elif options.now:
         now_option(options, rooms, times)
