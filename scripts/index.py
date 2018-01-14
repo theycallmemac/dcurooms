@@ -94,11 +94,11 @@ def flow(options, parser, rooms, info):
         lookup_option(options, rooms, details, times)
     elif options.now:
         now_option(options, rooms, times)
-    parser.print_help()
     
 def main():
     parser, (options, arguments), rooms, info = required()
     flow(options, parser, rooms, info)
+    parser.print_help()
 if __name__ == '__main__':
     main()
 
