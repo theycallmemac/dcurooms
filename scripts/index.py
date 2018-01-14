@@ -85,17 +85,21 @@ def required():
     times, c, g, details = get_data()
     return parser, (options, arguments), (c, g), (times, details)
 
-
-def flow(options, rooms, info):
-    times, details = info[0:2]
+def requesting_booking(options, rooms, details):
     if options.book and len(details) < 5:
         booking_option(rooms, details)
-    
+        
+def displaying_info(options, rooms, details, times):
     if options.lookup:
         lookup_option(options, rooms, details, times)
     elif options.now:
         now_option(options, rooms, times)
-    
+
+def flow(options, rooms, info):
+    times, details = info[0:2]
+    requesting_booking(options, rooms, details)
+    displaying_info(options, rooms, details, times)
+
 def main():
     parser, (options, arguments), rooms, info = required()
     flow(options, rooms, info)
