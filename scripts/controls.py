@@ -33,7 +33,7 @@ def run_loop(lst, options, details):
         status = checks.check_room(url)
         get_statuses(status, options, room)
 
-def book_grattan():
+def book_grattan(details):
     form = builders.fill_form(details)
     conf = checks.get_confirmation()
     if conf == "y":
@@ -43,7 +43,7 @@ def book_grattan():
         print("Form submission withdrawn.")
     sys.exit()
         
-def book_computing():
+def book_computing(details):
     creds = []
     user, password, from_who, to_who, message = builders.draft_email(details)
     creds = [user, password]

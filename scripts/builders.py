@@ -10,6 +10,7 @@ from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
 sys.path.append('.')
+import checks
 if sys.version_info[0] < 3:
     from cookielib import LWPCookieJar
 else:
@@ -38,7 +39,8 @@ def build_timetable(room, week, day, hour):
 
 
 def fill_form(args):
-    browser, cookiejar = StatefulBrowser(), LWPCookieJar()
+    browser = StatefulBrowser()
+    cookie_jar = LWPCookieJar()
     browser.set_cookiejar(cookie_jar)
     room, date, from_time, to_time = args[0], args[1].split("/"), args[2][:2] + ":" + args[2][2:], args[3][:2] + ":" + args[3][2:]
     day, month, year = date[0], date[1], date[2]
