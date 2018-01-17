@@ -23,8 +23,11 @@ __copyright__ = 'Copyright (c) 2017 theycallmemac'
 __license__ = 'GPL-3.0'
 
 def get_statuses(status, options, room):
-    if options.available and len(status) <= 9: print(room + ": " + status)
-    else: print(room + ": " + status)
+    if options.available:
+        if len(status) <= 9: 
+            print(room + ": " + status)
+    else:
+        print(room + ": " + status)
         
 def run_loop(lst, options, details):
     week, day, time = details[0:3]
