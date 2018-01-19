@@ -94,11 +94,8 @@ def check_room(timetable_url):
 
 def get_confirmation():
     if sys.version_info[0] < 3:
-        confimation = raw_input(
-        "\nIs this the correct information? (y/n): ").lower()
+        confirmation = raw_input("\nIs this the correct information? (y/n): ").lower()
     else:
-        confirmation = input(
-        "\nIs this the correct information? (y/n): ").lower()
-
+        confirmation = input("\nIs this the correct information? (y/n): ").lower()
     return confirmation
 
