@@ -24,7 +24,7 @@ class LabBooking(object):
 
     def draft(self):
         FROM = self.email
-        TO = ['james.mcdermott89@gmail.com']
+        TO = ['irene.mcevoy@dcu.ie']
         SUBJECT = 'Lab Booking'
         BODY = "Just wondering if you could book " + self.arguments[0] + " on the " + \
                 self.arguments[1] + " from " + self.arguments[2][:2] + ":" + \
