@@ -31,9 +31,7 @@ def build_timetable(room, week, day, hour):
          AppleWebKit/537.36 (KHTML, like Gecko)
          Chrome/58.0.3029.110
          Safari/537.36""")]
-    url = "https://www101.dcu.ie/timetables/feed.php?room=" + room + \
-          "&week1=" + week + "&hour=" + str(hour) + \
-          "&day=" + day + "&template=location"
+    url = "https://www.dcu.ie/timetables/feed.php?room=" + room + "&week1=" + week + "&hour=" + str(hour) + "&day=" + day + "&template=location"
     browser.open(url)
     return browser, url
 

@@ -24,11 +24,11 @@ __license__ = 'GPL-3.0'
 
 def get_statuses(status, options, room):
     if options.available:
-        if len(status) <= 9: 
+        if len(status) <= 9:
             print(room + ": " + status)
     else:
         print(room + ": " + status)
-        
+
 def run_loop(lst, options, details):
     week, day, time = details[0:3]
     for room in lst:
@@ -45,7 +45,7 @@ def book_grattan(details):
     else:
         print("Form submission withdrawn.")
     sys.exit()
-        
+
 def book_computing(details):
     creds = []
     user, password, from_who, to_who, message = builders.draft_email(details)
@@ -101,8 +101,8 @@ def available_now_control(options, lst, times):
         minute = '00'
     checks.check_arguments(int(week), int(day))
     time = checks.search_dictionary(times, hour + minute)
-    details = [week, day, time]    
-    run_loop(lst, options, details)    
+    details = [week, day, time]
+    run_loop(lst, options, details)
     sys.exit()
 
 
