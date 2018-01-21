@@ -11,7 +11,7 @@ from lookup import LookUp
 from now import Now
 
 __author__ = "theycallmemac"
-__version__ = '1.0.0'
+__version__ = '2.0.0'
 __copyright__ = 'Copyright (c) 2018 theycallmemac'
 __license__ = 'GPL-3.0'
 

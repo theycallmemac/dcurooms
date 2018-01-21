@@ -1,5 +1,13 @@
 import sys
 import smtplib
+
+
+__author__ = "theycallmemac"
+__version__ = '2.0.0'
+__copyright__ = 'Copyright (c) 2018 theycallmemac'
+__license__ = 'GPL-3.0'
+
+
 class LabBooking(object):
     arguments = []
     email= ""

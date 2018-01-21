@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 setup(name='dcurooms',
-      version='1.0.0',
+      version='2.0.0',
       description='Shows room information around the DCU campus',
       author='theycallmemac',
       url='https://github.com/theycallmemac/dcurooms',
       license='GPL-3.0',
-      scripts=['scripts/dcurooms', 'scripts/index.py', 'scripts/controls.py', 'scripts/builders.py', 'scripts/checks.py'],
+      scripts=['scripts/dcurooms', 'scripts/main.py', 'scripts/lab_booking.py', 'scripts/room_booking.py', 'scripts/lookup.py', 'scripts/now.py'],
       install_requires=[
           'MechanicalSoup', 'bs4', 'requests'
       ],

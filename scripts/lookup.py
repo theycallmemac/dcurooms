@@ -1,8 +1,13 @@
 import sys
 from mechanicalsoup import StatefulBrowser
-from http.cookiejar import LWPCookieJar
 from requests import get
 from bs4 import BeautifulSoup
+
+if sys.version_info[0] < 3:
+    from cookielib import LWPCookieJar
+else:
+    from http.cookiejar import LWPCookieJar
+
 __author__ = "theycallmemac"
 __version__ = '2.0.0'
 __copyright__ = 'Copyright (c) 2018 theycallmemac'
