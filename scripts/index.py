@@ -21,7 +21,6 @@ __version__ = '1.0.0'
 __copyright__ = 'Copyright (c) 2017 theycallmemac'
 __license__ = 'GPL-3.0'
 
-
 def setup_options():
     parser = OptionParser(
         description='Displays info and books room around DCU.',
