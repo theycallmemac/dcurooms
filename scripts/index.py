@@ -10,7 +10,7 @@ from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
 sys.path.append(".")
-from scripts import controls
+import controls
 if sys.version_info[0] < 3:
     from cookielib import LWPCookieJar
 else:
