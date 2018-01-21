@@ -3,7 +3,6 @@ import sys
 import datetime
 import os
 sys.path.append('.')
-from scripts import index
 class LookupTestCase(unittest.TestCase):
     def test_options(self):
         room_result = os.system("""cd scripts &&
