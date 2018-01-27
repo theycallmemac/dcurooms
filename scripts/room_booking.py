@@ -47,6 +47,18 @@ class RoomBooking(object):
         browser["submitted[email_address]"] = self.email
         return browser
 
+    def confirm(self):
+        if int(sys.version[0]) < 3:
+            conf = raw_input("Is this information correct? (y/n): ")
+        else:
+            conf - input("Is this information correct? (y/n): ")
+
+        if conf == "y":
+            return conf
+        else:
+            return "n"
+
+
     def submit(self, form):
         request = form.request
         response = form.submit_selected()

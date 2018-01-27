@@ -9,6 +9,8 @@ from lab_booking import LabBooking
 from room_booking import RoomBooking
 from lookup import LookUp
 from now import Now
+import utils
+import opts
 
 __author__ = "theycallmemac"
 __version__ = '2.0.0'
@@ -18,8 +20,7 @@ __license__ = 'GPL-3.0'
 def setup_options():
     parser = OptionParser(
         description='Displays info and books room around DCU.',
-        prog='dcurooms', version='%prog ' + __version__,
-        usage='%prog [option]')
+        prog='dcurooms', version='%prog ' + __version__, usage='%prog [option]')
     parser.add_option(
         "-l", "--lookup", action="store_true",
         help="returns information given a specific room, week, day and hour")
@@ -39,7 +40,6 @@ def setup_options():
     parser.add_option(
         "-C", "--grattan", action="store_true",
         help="displays the status of rooms in the Henry Grattan building")
-
     return parser
 
 def get_data():
@@ -52,71 +52,17 @@ def required():
     times, c, g, details = get_data()
     return parser, (options, arguments), (c, g), (times, details)
 
-def get_lab_credentials():
-    email = input("Your gmail: ")
-    password = input("Your gmail password: ")
-    your_name = input("Your name: ")
-    society = input("Society name: ")
-    return email, password, your_name, society
-
-def get_room_credentials():
-    name = input("Your name: ")
-    email = input("Your email: ")
-    number = input("Your number: ")
-    society = input("Society name: ")
-    return email, number, name, society
-
-def get_lst(c, g, options):
-    if options.computing: lst = c
-    elif options.grattan: lst = g
-    return lst
-
-def get_current_time(date):
-    day = date.weekday()
-    hour = date.hour
-    minute = date.minute
-    year, week_no, weekday = date.isocalendar()
-    start = 36
-    if week_no >= start:
-        offset = -start
-    else:
-        offset = 52 - start
-    week = week_no + offset - 1
-    return str(week), str(day + 1), str(hour), str(minute)
-
 def main():
     parser, (options, arguments), rooms, info = required()
     if options.book and info[1][0][0] == "L":
-        email, password, your_name, society = get_lab_credentials()
-        lab = LabBooking(email, password, your_name, society, info[1])
-        emails, message = lab.draft()
-        print(message)
-        result = lab.send(emails[0], emails[1], message)
+        opts.booking_lab(info)
     elif options.book and info[1][0][0] == "C":
-        email, number, name, society = get_room_credentials()
-        room = RoomBooking(email, number, name, society, info[1])
-        form = room.fill()
-        result = room.submit(form)
+        opts.booking_room(info)
     if options.lookup and (options.grattan or options.computing):
-        lst = get_lst(rooms[0], rooms[1], options)
-        week, day, hour = info[1]
-        look = LookUp(week, day, hour)
-        look.check_args()
-        look.check_time(info[0])
-        look.building_option(lst)
+        opts.lookup_building(rooms, info, options)
     elif options.lookup:
-        room, week, day, hour = info[1]
-        look = LookUp(week, day, hour)
-        look.check_args()
-        look.check_time(info[0])
-        look.room_option(room)
+        opts.lookup_room(info)
     if options.now:
-        week, day, hour, minute = get_current_time(datetime.datetime.now())
-        now = Now(week, day, hour, minute)
-        now.round_it()
-        now.check_args()
-        now.check_time(info[0])
-        lst = get_lst(rooms[0], rooms[1], options)
-        now.building_option(lst, options)
+        opts.now()
 if __name__ == "__main__":
     main()

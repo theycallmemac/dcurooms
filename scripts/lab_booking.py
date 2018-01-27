@@ -33,6 +33,18 @@ class LabBooking(object):
         message = """From: %s\nTo: %s\nSubject: %s\n\n%s""" % (FROM, ", ".join(TO), SUBJECT, BODY)
         return (FROM, TO), message
 
+
+    def confirm(self):
+        if int(sys.version[0]) < 3:
+            conf = raw_input("Is this information correct? (y/n): ")
+        else:
+            conf - input("Is this information correct? (y/n): ")
+        if conf == "y":
+            return conf
+        else:
+            return "n"
+
+
     def send(self, FROM, TO, message):
         try:
             server = smtplib.SMTP("smtp.gmail.com", 587)

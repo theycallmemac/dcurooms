@@ -7,7 +7,7 @@ setup(name='dcurooms',
       author='theycallmemac',
       url='https://github.com/theycallmemac/dcurooms',
       license='GPL-3.0',
-      scripts=['scripts/dcurooms', 'scripts/main.py', 'scripts/lab_booking.py', 'scripts/room_booking.py', 'scripts/lookup.py', 'scripts/now.py'],
+      scripts=['scripts/dcurooms', 'scripts/main.py', 'scripts/utils.py', 'scripts/opts.py', 'scripts/lab_booking.py', 'scripts/room_booking.py', 'scripts/lookup.py', 'scripts/now.py'],
       install_requires=[
           'MechanicalSoup', 'bs4', 'requests'
       ],
