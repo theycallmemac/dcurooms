@@ -4,15 +4,14 @@ import datetime
 import os
 sys.path.append('.')
 
-
 class AvailableNowTestCase(unittest.TestCase):
-    def test_options(self):
+    def setUp(self):
         available_result = os.system("""cd scripts/ && python dcurooms -anC
                                      > ../tests/available_output.txt""")
         self.assertTrue(available_result == 0)
 
     def test_available_output(self):
-        if self.test_options():
+        if self.setUp():
             with open('available_output.txt') as f:
                 for line in f:
                     if len(line.strip()[14:]) > 0:

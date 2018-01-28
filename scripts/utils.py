@@ -8,8 +8,8 @@ __license__ = 'GPL-3.0'
 
 
 def get_lst(c, g, options):
-    if options.computing: lst = c
-    elif options.grattan: lst = g
+    if options.computing == True: lst = c
+    elif options.grattan == True: lst = g
     return lst
 
 def get_current_time(date):
