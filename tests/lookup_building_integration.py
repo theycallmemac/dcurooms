@@ -37,7 +37,6 @@ class LookupBuildingIntegrationTestCase(unittest.TestCase):
         look = LookUp(week, day, hour)
         try:
             look.check_args()
-            look.check_time(info[0])
         except SystemExit:
             pass
 

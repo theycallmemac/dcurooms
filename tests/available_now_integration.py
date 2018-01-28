@@ -34,7 +34,6 @@ class AvailableNowIntegrationTestCase(unittest.TestCase):
         now = Now(week, day, hour, minute)
         try:
             now.check_args()
-            now.check_time(info[0])
         except SystemExit:
             pass
 if __name__ == '__main__':
