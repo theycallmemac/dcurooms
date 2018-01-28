@@ -9,9 +9,7 @@ install:
 
 script:
     - python tests/test_lookup_output.py
-    - python tests/lookup_building_integration.py
     - python tests/test_available_now_output.py
-    - python tests/available_now_integration.py
 
 notifications:
     email: false
