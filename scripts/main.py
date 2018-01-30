@@ -63,6 +63,6 @@ def main():
     elif options.lookup:
         opts.lookup_room(info)
     if options.now:
-        opts.now()
+        opts.now(rooms, info, options)
 if __name__ == "__main__":
     main()

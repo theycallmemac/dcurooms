@@ -53,7 +53,7 @@ def lookup_room(info):
     look.check_time(info[0])
     look.room_option(room)
 
-def now():
+def now(rooms, info, options):
     week, day, hour, minute = utils.get_current_time(datetime.datetime.now())
     now = Now(week, day, hour, minute)
     now.round_it()
