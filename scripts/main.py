@@ -52,17 +52,28 @@ def required():
     times, c, g, details = get_data()
     return parser, (options, arguments), (c, g), (times, details)
 
-def main():
-    parser, (options, arguments), rooms, info = required()
+def booking(options, info):
     if options.book and info[1][0][0] == "L":
         opts.booking_lab(info)
     elif options.book and info[1][0][0] == "C":
         opts.booking_room(info)
+
+def lookup(options, rooms, info):
     if options.lookup and (options.grattan or options.computing):
         opts.lookup_building(rooms, info, options)
     elif options.lookup:
         opts.lookup_room(info)
-    if options.now:
-        opts.now(rooms, info, options)
+
+def now(options, rooms, info):
+    opts.now(rooms, info, options)
+
+def main():
+    parser, (options, arguments), rooms, info = required()
+    if options.book:
+        booking(options, info)
+    elif options.lookup:
+        lookup(options, rooms, info)
+    elif options.now:
+        now(options, rooms, info)
 if __name__ == "__main__":
     main()

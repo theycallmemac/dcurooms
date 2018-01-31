@@ -34,17 +34,6 @@ class LabBooking(object):
         return (FROM, TO), message
 
 
-    def confirm(self):
-        if int(sys.version[0]) < 3:
-            conf = raw_input("Is this information correct? (y/n): ")
-        else:
-            conf - input("Is this information correct? (y/n): ")
-        if conf == "y":
-            return conf
-        else:
-            return "n"
-
-
     def send(self, FROM, TO, message):
         try:
             server = smtplib.SMTP("smtp.gmail.com", 587)
@@ -53,7 +42,7 @@ class LabBooking(object):
             server.login(self.email, self.password)
             server.sendmail(FROM, TO, message)
             server.close()
-            print("Your email has been sent.")
+            return "Your email has been sent."
         except BaseException:
-            print("Email failed to send.")
+            return "Email failed to send."
 

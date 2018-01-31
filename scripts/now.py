@@ -2,6 +2,7 @@ import sys
 from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
+import utils
 
 if sys.version_info[0] < 3:
     from cookielib import LWPCookieJar
@@ -43,14 +44,17 @@ class Now(object):
             self.minute = '00'
 
     def check_time(self, times):
-        if self.hour not in times:
+        time = self.hour + self.minute
+        if time not in times:
             print("Outside scheduled timetables. Please try again at 08:00.")
+            sys.exit()
         for k, v in times.items():
-            if k == self.hour + self.minute:
-                self.hour = v
+            if k == self.hour:
+                time = v
                 break
             else:
                 pass
+        return time
 
     def get_status(self, options, room, status):
         if options.available:
@@ -76,12 +80,6 @@ class Now(object):
              Safari/537.36""")]
         url = "https://www.dcu.ie/timetables/feed.php?room=GLA." + room + "&week1=" + self.week + "&hour=" + self.hour + "&day=" +  self.day  + "&template=location"
         browser.open(url)
-        result = Now.check_room(self, url)
+        result = utils.check_room(url)
         return result
-
-    def check_room(self, url):
-        html = get(url)
-        soup = BeautifulSoup(html.text, "lxml")
-        tr = soup.select('tr')
-        return str(tr[12].getText().strip()) + " -> " + str(tr[14].getText().strip())
 
