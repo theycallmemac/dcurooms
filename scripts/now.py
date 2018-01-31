@@ -2,7 +2,7 @@ import sys
 from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
-from scripts import utils
+import utils
 
 if sys.version_info[0] < 3:
     from cookielib import LWPCookieJar
