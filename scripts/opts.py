@@ -5,7 +5,6 @@ from room_booking import RoomBooking
 from lookup import LookUp
 from now import Now
 import utils
-import shared
 
 __author__ = "theycallmemac"
 __version__ = '2.0.0'
@@ -23,7 +22,7 @@ def booking_lab(info):
     lab = LabBooking(email, password, your_name, society, info[1])
     emails, message = lab.draft()
     print(message)
-    conf = shared.confirm()
+    conf = utils.confirm()
     if conf == "y":
         result = lab.send(emails[0], emails[1], message)
         print(result)
@@ -34,7 +33,7 @@ def booking_room(info):
     email, number, name, society = get_room_credentials()
     room = RoomBooking(email, number, name, society, info[1])
     form = room.fill()
-    conf = shared.confirm()
+    conf = utils.confirm()
     if conf == "y":
         result = room.submit(form)
         print(result)
@@ -45,7 +44,7 @@ def lookup_building(rooms, info, options):
     lst = utils.get_lst(rooms[0], rooms[1], options)
     week, day, hour = info[1]
     look = LookUp(week, day, hour)
-    shared.check_args(week, day)
+    utils.check_args(week, day)
     look.check_time(info[0])
     look.building_option(lst)
 
