@@ -1,6 +1,8 @@
 import unittest
 import sys
 import datetime
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from scripts import utils
 from scripts import now
 from test_required import required
