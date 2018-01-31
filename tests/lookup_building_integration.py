@@ -1,9 +1,15 @@
 import unittest
 import sys
 import datetime
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+
 from scripts import utils
 from scripts import lookup
 from test_required import required
+
+
 class LookupBuildingIntegrationTestCase(unittest.TestCase):
     def test_lab_lookups(self):
         parser, (options, arguments), rooms, info = required()
