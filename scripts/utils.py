@@ -73,7 +73,7 @@ def get_version_form():
         society = raw_input("Society name: ")
         return email, number, name, society
     else:
-        name = string(input("Your name: "))
+        name = input("Your name: ")
         email = input("Your email: ")
         number = input("Your number: ")
         society = input("Society name: ")
