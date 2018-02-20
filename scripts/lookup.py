@@ -3,7 +3,6 @@ from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
 import utils
-from termcolor import colored
 if sys.version_info[0] < 3:
     from cookielib import LWPCookieJar
 else:
