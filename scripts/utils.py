@@ -49,7 +49,7 @@ def get_current_time(date):
     else:
         offset = 52 - start
     week = week_no + offset - 1
-    return str(week), str(day + 1), str(hour - 2), str(minute)
+    return str(week), str(day + 1), str(hour), str(minute)
 
 def get_version_email():
     if int(sys.version[0]) < 3:

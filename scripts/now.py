@@ -49,12 +49,12 @@ class Now(object):
             print("\033[1;93m{0}\033[00m".format("Outside scheduled timetables. Please try again at 08:00."))
             sys.exit()
         for k, v in times.items():
-            if k == self.hour:
-                time = v
+            if k == time:
+                self.hour = v
                 break
             else:
                 pass
-        return time
+        return self.hour
 
     def get_status(self, options, room, status):
         if options.available:
