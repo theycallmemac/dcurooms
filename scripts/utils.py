@@ -2,6 +2,7 @@ import datetime
 import sys
 from requests import get
 from bs4 import BeautifulSoup
+import getpass
 
 __author__ = "theycallmemac"
 __version__ = '2.0.0'
@@ -10,9 +11,9 @@ __license__ = 'GPL-3.0'
 
 def confirm():
     if int(sys.version[0]) < 3:
-        conf = raw_input("Is this information correct? (y/n): ")
+        conf = raw_input("\033[1;93m{0}\033[00m".format("\nIs this information correct? (y/n): "))
     else:
-        conf = input("Is this information correct? (y/n): ")
+        conf = input("\033[1;93m{0}\033[00m".format("\nIs this information correct? (y/n): "))
     if conf == "y":
         return conf
     else:
@@ -21,7 +22,7 @@ def confirm():
 
 def check_args(week, day):
     if int(week) not in range(1, 53) or int(day) not in range(1, 7):
-        print("Incorrect parameters passed.")
+        print("\033[1;91m{0}\033[00m".format("Incorrect parameters passed."))
         sys.exit()
     else:
         pass
@@ -48,33 +49,33 @@ def get_current_time(date):
     else:
         offset = 52 - start
     week = week_no + offset - 1
-    return str(week), str(day + 1), str(hour), str(minute)
+    return str(week), str(day + 1), str(hour - 2), str(minute)
 
 def get_version_email():
     if int(sys.version[0]) < 3:
-        email = raw_input("Your gmail: ")
-        password = raw_input("Your gmail password: ")
-        your_name = raw_input("Your name: ")
-        society = raw_input("Society name: ")
+        email = raw_input("\033[1;97m{0}\033[00m".format("Your gmail: "))
+        password = getpass.getpass("\033[1;97m{0}\033[00m".format("Your gmail password: "))
+        your_name = raw_input("\033[1;97m{0}\033[00m".format("Your name: "))
+        society = raw_input("\033[1;97m{0}\033[00m".format("Society name: "))
         return email, password, your_name, society
     else:
-        email = str(input("Your gmail: "))
-        password = input("Your gmail password: ")
-        your_name = input("Your name: ")
-        society = input("Society name: ")
+        email = input("\033[1;97m{0}\033[00m".format("Your gmail: "))
+        password = getpass.getpass("\033[1;97m{0}\033[00m".format("Your gmail password: "))
+        your_name = input("\033[1;97m{0}\033[00m".format("Your name: "))
+        society = input("\033[1;97m{0}\033[00m".format("Society name: "))
     return email, password, your_name, society
 
 
 def get_version_form():
     if int(sys.version[0]) < 3:
-        name = raw_input("Your name: ")
-        email = raw_input("Your email: ")
-        number = raw_input("Your number: ")
-        society = raw_input("Society name: ")
+        name = raw_input("\033[1;97m{0}\033[00m".format("Your name: "))
+        email = raw_input("\033[1;97m{0}\033[00m".format("Your email: "))
+        number = raw_input("\033[1;97m{0}\033[00m".format("Your number: "))
+        society = raw_input("\033[1;97m{0}\033[00m".format("Society name: "))
         return email, number, name, society
     else:
-        name = string(input("Your name: "))
-        email = input("Your email: ")
-        number = input("Your number: ")
-        society = input("Society name: ")
+        name = input("\033[1;97m{0}\033[00m".format("Your name: "))
+        email = input("\033[1;97m{0}\033[00m".format("Your email: "))
+        number = input("\033[1;97m{0}\033[00m".format("Your number: "))
+        society = input("\033[1;97m{0}\033[00m".format("Society name: "))
         return email, number, name, society

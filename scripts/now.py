@@ -29,14 +29,14 @@ class Now(object):
 
     def check_args(self):
         if int(self.week) not in range(1, 53) or int(self.day) not in range(1, 7):
-            print("Incorrect parameters passed.")
+            print("\033[1;91m{0}\033[00m".format("Incorrect parameters passed."))
             sys.exit()
         else:
             pass
 
     def round_it(self):
         if int(self.hour) < 8 or int(self.hour) >= 23:
-            print("Outside scheduled timetables. Try again at 08:00.")
+            print("\033[1;93m{0}\033[00m".format("Outside scheduled timetables. Try again at 08:00."))
             sys.exit()
         if int(self.minute) >= 30:
             self.minute = '30'
@@ -46,7 +46,7 @@ class Now(object):
     def check_time(self, times):
         time = self.hour + self.minute
         if time not in times:
-            print("Outside scheduled timetables. Please try again at 08:00.")
+            print("\033[1;93m{0}\033[00m".format("Outside scheduled timetables. Please try again at 08:00."))
             sys.exit()
         for k, v in times.items():
             if k == self.hour:
@@ -59,9 +59,12 @@ class Now(object):
     def get_status(self, options, room, status):
         if options.available:
             if len(status) <= 9:
-                print(room + ": " + status)
+                print("\033[1;92m{0}\033[00m".format(room) + ": " +"\033[1;97m{0}\033[00m".format(status))
+        elif len(status) > 9:
+            print("\033[1;91m{0}\033[00m".format(room) + ": " +"\033[1;90m{0}\033[00m".format(status))      
         else:
-            print(room + ": " + status)
+            print("\033[1;92m{0}\033[00m".format(room) + ": " +"\033[1;97m{0}\033[00m".format(status))      
+
 
     def building_option(self, lst, options):
         for room in lst:
