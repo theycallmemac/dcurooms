@@ -19,11 +19,10 @@ __license__ = 'GPL-3.0'
 
 def setup_options():
     parser = OptionParser(
-        description='Displays info and books room around DCU.',
-        prog='dcurooms', version='%prog ' + __version__, usage='%prog [option]')
+        description="\033[1;97m{0}\033[00m".format('Displays info and books room around DCU.'),
+        prog="\033[1;97m{0}\033[00m".format('dcurooms'), version='%prog ' + __version__, usage='%prog [' + '\033[1;92m{0}\033[00m'.format("option") + ']')
     parser.add_option(
-        "-l", "--lookup", action="store_true",
-        help="returns information given a specific room, week, day and hour")
+        "-l", "--lookup", action="store_true", help="returns information given a specific room, week, day and hour")
     parser.add_option(
         "-b", "--book", action="store_true",
         help="books a room by providing the room, D/M/YYYY, start, and end")

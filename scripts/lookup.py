@@ -3,7 +3,6 @@ from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
 import utils
-
 if sys.version_info[0] < 3:
     from cookielib import LWPCookieJar
 else:
@@ -38,7 +37,10 @@ class LookUp(object):
     def building_option(self, lst):
         for room in lst:
             status = LookUp.build_timetable(self, room)
-            print(room + ": " + status)
+            if len(status) <= 9:
+                print("\033[1;92m{0}\033[00m".format(room) + ": " + "\033[1;97m{0}\033[00m".format(status))
+            else:
+                print("\033[1;91m{0}\033[00m".format(room) + ": " + "\033[1;90m{0}\033[00m".format(status))
 
     def room_option(self, room):
         status = LookUp.build_timetable(self, room)

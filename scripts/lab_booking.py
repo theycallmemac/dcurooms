@@ -30,7 +30,7 @@ class LabBooking(object):
                 self.arguments[1] + " from " + self.arguments[2][:2] + ":" + \
                 self.arguments[2][2:] + " to " + self.arguments[3][:2] + ":" + \
                 self.arguments[3][2:] + " for " + self.society + ".\n\nThank you,\n" + self.name + "."
-        message = """From: %s\nTo: %s\nSubject: %s\n\n%s""" % (FROM, ", ".join(TO), SUBJECT, BODY)
+        message = """\nFrom: %s\nTo: %s\nSubject: %s\n\n%s""" % (FROM, ", ".join(TO), SUBJECT, BODY)
         return (FROM, TO), message
 
 
