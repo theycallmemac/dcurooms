@@ -9,11 +9,14 @@ __version__ = '2.0.0'
 __copyright__ = 'Copyright (c) 2018 theycallmemac'
 __license__ = 'GPL-3.0'
 
+
 def confirm():
     if int(sys.version[0]) < 3:
-        conf = raw_input("\033[1;93m{0}\033[00m".format("\nIs this information correct? (y/n): "))
+        conf = raw_input("\033[1;93m{0}\033[00m".format(
+            "\nIs this information correct? (y/n): "))
     else:
-        conf = input("\033[1;93m{0}\033[00m".format("\nIs this information correct? (y/n): "))
+        conf = input("\033[1;93m{0}\033[00m".format(
+            "\nIs this information correct? (y/n): "))
     if conf == "y":
         return conf
     else:
@@ -27,16 +30,22 @@ def check_args(week, day):
     else:
         pass
 
+
 def check_room(timetable_url):
     html = get(timetable_url)
     soup = BeautifulSoup(html.text, "lxml")
     tr = soup.select('tr')
-    return str(tr[12].getText().strip()) + " -> " + str(tr[14].getText().strip())
+    return str(tr[12].getText().strip()) + " -> " + \
+        str(tr[14].getText().strip())
+
 
 def get_lst(c, g, options):
-    if options.computing == True: lst = c
-    elif options.grattan == True: lst = g
+    if options.computing:
+        lst = c
+    elif options.grattan:
+        lst = g
     return lst
+
 
 def get_current_time(date):
     day = date.weekday()
@@ -51,16 +60,19 @@ def get_current_time(date):
     week = week_no + offset - 1
     return str(week), str(day + 1), str(hour), str(minute)
 
+
 def get_version_email():
     if int(sys.version[0]) < 3:
         email = raw_input("\033[1;97m{0}\033[00m".format("Your gmail: "))
-        password = getpass.getpass("\033[1;97m{0}\033[00m".format("Your gmail password: "))
+        password = getpass.getpass(
+            "\033[1;97m{0}\033[00m".format("Your gmail password: "))
         your_name = raw_input("\033[1;97m{0}\033[00m".format("Your name: "))
         society = raw_input("\033[1;97m{0}\033[00m".format("Society name: "))
         return email, password, your_name, society
     else:
         email = input("\033[1;97m{0}\033[00m".format("Your gmail: "))
-        password = getpass.getpass("\033[1;97m{0}\033[00m".format("Your gmail password: "))
+        password = getpass.getpass(
+            "\033[1;97m{0}\033[00m".format("Your gmail password: "))
         your_name = input("\033[1;97m{0}\033[00m".format("Your name: "))
         society = input("\033[1;97m{0}\033[00m".format("Society name: "))
     return email, password, your_name, society

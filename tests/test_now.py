@@ -3,6 +3,8 @@ import sys
 import datetime
 sys.path.append('.')
 from scripts.utils import get_current_time
+
+
 class RequiredTestCase(unittest.TestCase):
     def test_time(self):
         now = get_current_time(datetime.datetime.now())
@@ -11,6 +13,7 @@ class RequiredTestCase(unittest.TestCase):
         hr_d = datetime.datetime.now().hour
         mn_d = datetime.datetime.now().minute
         self.assertTrue(hr == hr_d and mn == mn_d)
+
+
 if __name__ == '__main__':
     unittest.main()
-

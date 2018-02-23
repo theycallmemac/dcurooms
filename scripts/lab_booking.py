@@ -10,7 +10,7 @@ __license__ = 'GPL-3.0'
 
 class LabBooking(object):
     arguments = []
-    email= ""
+    email = ""
     password = ""
     name = ""
     society = ""
@@ -26,13 +26,15 @@ class LabBooking(object):
         FROM = self.email
         TO = ['irene.mcevoy@dcu.ie']
         SUBJECT = 'Lab Booking'
-        BODY = "Just wondering if you could book " + self.arguments[0] + " on the " + \
-                self.arguments[1] + " from " + self.arguments[2][:2] + ":" + \
-                self.arguments[2][2:] + " to " + self.arguments[3][:2] + ":" + \
-                self.arguments[3][2:] + " for " + self.society + ".\n\nThank you,\n" + self.name + "."
-        message = """\nFrom: %s\nTo: %s\nSubject: %s\n\n%s""" % (FROM, ", ".join(TO), SUBJECT, BODY)
+        BODY = "Just wondering if you could book " + \
+            self.arguments[0] + " on the " + \
+            self.arguments[1] + " from " + self.arguments[2][:2] + ":" + \
+            self.arguments[2][2:] + " to " + self.arguments[3][:2] + ":" + \
+            self.arguments[3][2:] + " for " + self.society + \
+            ".\n\nThank you,\n" + self.name + "."
+        message = """\nFrom: %s\nTo: %s\nSubject: %s\n\n%s""" % (
+            FROM, ", ".join(TO), SUBJECT, BODY)
         return (FROM, TO), message
-
 
     def send(self, FROM, TO, message):
         try:
@@ -45,4 +47,3 @@ class LabBooking(object):
             return "Your email has been sent."
         except BaseException:
             return "Email failed to send."
-

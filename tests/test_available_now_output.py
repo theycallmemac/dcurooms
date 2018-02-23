@@ -4,9 +4,11 @@ import datetime
 import os
 sys.path.append('.')
 
+
 class AvailableNowTestCase(unittest.TestCase):
     def setUp(self):
-        available_result = os.system("""python scripts/dcurooms -anC > tests/available_output.txt""")
+        available_result = os.system(
+            """python scripts/dcurooms -anC > tests/available_output.txt""")
         self.assertTrue(available_result == 0)
 
     def test_available_output(self):
@@ -27,4 +29,3 @@ class AvailableNowTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

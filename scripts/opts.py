@@ -11,11 +11,14 @@ __version__ = '2.0.0'
 __copyright__ = 'Copyright (c) 2018 theycallmemac'
 __license__ = 'GPL-3.0'
 
+
 def get_lab_credentials():
     return utils.get_version_email()
 
+
 def get_room_credentials():
     return utils.get_version_form()
+
 
 def booking_lab(info):
     email, password, your_name, society = get_lab_credentials()
@@ -29,6 +32,7 @@ def booking_lab(info):
     else:
         "Booking cancelled."
 
+
 def booking_room(info):
     email, number, name, society = get_room_credentials()
     room = RoomBooking(email, number, name, society, info[1])
@@ -40,6 +44,7 @@ def booking_room(info):
     else:
         "Booking cancelled."
 
+
 def lookup_building(rooms, info, options):
     lst = utils.get_lst(rooms[0], rooms[1], options)
     week, day, hour = info[1]
@@ -48,12 +53,14 @@ def lookup_building(rooms, info, options):
     look.check_time(info[0])
     look.building_option(lst)
 
+
 def lookup_room(info):
     room, week, day, hour = info[1]
     look = LookUp(week, day, hour)
     utils.check_args(week, day)
     look.check_time(info[0])
     look.room_option(room)
+
 
 def now(rooms, info, options):
     week, day, hour, minute = utils.get_current_time(datetime.datetime.now())
@@ -63,4 +70,3 @@ def now(rooms, info, options):
     now.check_time(info[0])
     lst = utils.get_lst(rooms[0], rooms[1], options)
     now.building_option(lst, options)
-

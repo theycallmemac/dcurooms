@@ -13,6 +13,7 @@ __version__ = '2.0.0'
 __copyright__ = 'Copyright (c) 2018 theycallmemac'
 __license__ = 'GPL-3.0'
 
+
 class LookUp(object):
     week = ""
     day = ""
@@ -38,9 +39,11 @@ class LookUp(object):
         for room in lst:
             status = LookUp.build_timetable(self, room)
             if len(status) <= 9:
-                print("\033[1;92m{0}\033[00m".format(room) + ": " + "\033[1;97m{0}\033[00m".format(status))
+                print("\033[1;92m{0}\033[00m".format(room) +
+                      ": " + "\033[1;97m{0}\033[00m".format(status))
             else:
-                print("\033[1;91m{0}\033[00m".format(room) + ": " + "\033[1;90m{0}\033[00m".format(status))
+                print("\033[1;91m{0}\033[00m".format(room) +
+                      ": " + "\033[1;90m{0}\033[00m".format(status))
 
     def room_option(self, room):
         status = LookUp.build_timetable(self, room)
@@ -56,8 +59,10 @@ class LookUp(object):
              AppleWebKit/537.36 (KHTML, like Gecko)
              Chrome/58.0.3029.110
              Safari/537.36""")]
-        url = "https://www.dcu.ie/timetables/feed.php?room=GLA." + room + "&week1=" + self.week + "&hour=" + str(self.hour) + "&day=" + self.day + "&template=location"
+        url = "https://www.dcu.ie/timetables/feed.php?room=GLA." + \
+            room + "&week1=" + self.week + \
+            "&hour=" + str(self.hour) + \
+            "&day=" + self.day + "&template=location"
         browser.open(url)
         result = utils.check_room(url)
         return result
-

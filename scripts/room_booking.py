@@ -12,9 +12,10 @@ __version__ = '2.0.0'
 __copyright__ = 'Copyright (c) 2018 theycallmemac'
 __license__ = 'GPL-3.0'
 
+
 class RoomBooking(object):
     arguments = []
-    email= ""
+    email = ""
     number = ""
     name = ""
     society = ""
@@ -30,7 +31,10 @@ class RoomBooking(object):
         browser = StatefulBrowser()
         cookie_jar = LWPCookieJar()
         browser.set_cookiejar(cookie_jar)
-        room, date, start, end = self.arguments[0], self.arguments[1].split("/"), self.arguments[2][:2] + ":" + self.arguments[2][2:], self.arguments[3][:2] + ":" + self.arguments[3][2:]
+        room, date, start, end = self.arguments[0], self.arguments[1].split(
+            "/"), self.arguments[2][:2] + ":" + \
+            self.arguments[2][2:], self.arguments[3][:2] + \
+            ":" + self.arguments[3][2:]
         day, month, year = date[0], date[1], date[2]
         browser.open("http://www.dcu.ie/registry/booking.shtml")
         browser.select_form(nr=4)
