@@ -36,7 +36,7 @@ class RoomBooking(object):
             self.arguments[2][2:], self.arguments[3][:2] + \
             ":" + self.arguments[3][2:]
         day, month, year = date[0], date[1], date[2]
-        browser.open("http://www.dcu.ie/registry/booking.shtml")
+        browser.open("http://www.dcu.ie/registry/booking.shtml", verify=False)
         browser.select_form(nr=4)
         browser["submitted[name_of_club_society]"] = self.society
         browser["submitted[name_of_person_making_booking]"] = self.name

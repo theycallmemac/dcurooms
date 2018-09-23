@@ -93,8 +93,8 @@ class Now(object):
              AppleWebKit/537.36 (KHTML, like Gecko)
              Chrome/58.0.3029.110
              Safari/537.36""")]
-        url = "https://www.dcu.ie/timetables/feed.php?room=GLA." + room + "&week1=" + \
+        url = "http://www101.dcu.ie/timetables/feed.php?room=GLA." + room + "&week1=" + \
             self.week + "&hour=" + self.hour + "&day=" + self.day + "&template=location"
-        browser.open(url)
+        browser.open(url, verify-False)
         result = utils.check_room(url)
         return result

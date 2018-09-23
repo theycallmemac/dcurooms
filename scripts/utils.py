@@ -1,8 +1,9 @@
 import datetime
 import sys
-from requests import get
 from bs4 import BeautifulSoup
 import getpass
+from requests import get
+
 
 __author__ = "theycallmemac"
 __version__ = '2.0.0'
@@ -32,7 +33,7 @@ def check_args(week, day):
 
 
 def check_room(timetable_url):
-    html = get(timetable_url)
+    html = get(timetable_url, verify=False)
     soup = BeautifulSoup(html.text, "lxml")
     tr = soup.select('tr')
     return str(tr[12].getText().strip()) + " -> " + \

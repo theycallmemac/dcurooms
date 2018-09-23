@@ -1,6 +1,5 @@
 import sys
 from mechanicalsoup import StatefulBrowser
-from requests import get
 from bs4 import BeautifulSoup
 import utils
 if sys.version_info[0] < 3:
@@ -59,10 +58,10 @@ class LookUp(object):
              AppleWebKit/537.36 (KHTML, like Gecko)
              Chrome/58.0.3029.110
              Safari/537.36""")]
-        url = "https://www.dcu.ie/timetables/feed.php?room=GLA." + \
+        url = "http://www101.dcu.ie/timetables/feed.php?room=GLA." + \
             room + "&week1=" + self.week + \
             "&hour=" + str(self.hour) + \
             "&day=" + self.day + "&template=location"
-        browser.open(url)
+        browser.open(url, verify=False)
         result = utils.check_room(url)
         return result
