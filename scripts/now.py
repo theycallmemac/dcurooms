@@ -2,6 +2,8 @@ import sys
 from mechanicalsoup import StatefulBrowser
 from requests import get
 from bs4 import BeautifulSoup
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import utils
 
 if sys.version_info[0] < 3:
@@ -95,6 +97,6 @@ class Now(object):
              Safari/537.36""")]
         url = "http://www101.dcu.ie/timetables/feed.php?room=GLA." + room + "&week1=" + \
             self.week + "&hour=" + self.hour + "&day=" + self.day + "&template=location"
-        browser.open(url, verify-False)
+        browser.open(url, verify=False)
         result = utils.check_room(url)
         return result
