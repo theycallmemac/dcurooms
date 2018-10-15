@@ -62,7 +62,7 @@ def get_data():
              '2130': '28', '2200': '29', '2230': '30'}
     c = ['LG25', 'LG26', 'LG27', 'L101', 'L114', 'L125', 'L128']
     g = ['CG01', 'CG02', 'CG03', 'CG04', 'CG05', 'CG06', 'CG11',
-         'CG12', 'CG20', 'CG68', 'C166']
+         'CG12', 'CG20', 'CG68', 'CG86', 'C166']
     details = sys.argv[2:]
     return times, c, g, details
 
