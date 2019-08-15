@@ -46,7 +46,7 @@ def booking_room(info):
 
 
 def lookup_building(rooms, info, options):
-    lst = utils.get_lst(rooms[0], rooms[1], options)
+    lst = utils.get_lst(rooms[0], rooms[1], rooms[2], rooms[3], options)
     week, day, hour = info[1]
     look = LookUp(week, day, hour)
     utils.check_args(week, day)
@@ -68,5 +68,5 @@ def now(rooms, info, options):
     now.round_it()
     utils.check_args(week, day)
     now.check_time(info[0])
-    lst = utils.get_lst(rooms[0], rooms[1], options)
+    lst = utils.get_lst(rooms[0], rooms[1], rooms[2], rooms[3], options)
     now.building_option(lst, options)

@@ -40,11 +40,15 @@ def check_room(timetable_url):
         str(tr[14].getText().strip())
 
 
-def get_lst(c, g, options):
+def get_lst(c, g, q, h, options):
     if options.computing:
         lst = c
     elif options.grattan:
         lst = g
+    elif options.business:
+        lst = q
+    elif options.nursing:
+        lst = h
     return lst
 
 

@@ -55,7 +55,7 @@ class Now(object):
             self.minute = '00'
 
     def check_time(self, times):
-        time = self.hour + self.minute
+        time = "0" + self.hour + self.minute
         if time not in times:
             print("\033[1;93m{0}\033[00m".format(
                 "Outside scheduled timetables. Please try again at 08:00."))

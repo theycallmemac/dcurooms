@@ -46,6 +46,12 @@ def setup_options():
     parser.add_option(
         "-C", "--grattan", action="store_true",
         help="displays the status of rooms in the Henry Grattan building")
+    parser.add_option(
+        "-H", "--nursing", action="store_true",
+        help="displays the status of rooms in the Nursing building")
+    parser.add_option(
+        "-Q", "--business", action="store_true",
+        help="displays the status of rooms in the Business building")
     return parser
 
 
@@ -63,15 +69,17 @@ def get_data():
     c = ['LG25', 'LG26', 'LG27', 'L101', 'L114', 'L125', 'L128']
     g = ['CG01', 'CG02', 'CG03', 'CG04', 'CG05', 'CG06', 'CG11',
          'CG12', 'CG20', 'CG68', 'CG86', 'C166']
+    q = ["QG21", "QG22", "Q121", "Q122"]
+    h = ["HG20", "HG22", "HG23"]
     details = sys.argv[2:]
-    return times, c, g, details
+    return times, c, g, q, h, details
 
 
 def required():
     parser = setup_options()
     (options, arguments) = parser.parse_args()
-    times, c, g, details = get_data()
-    return parser, (options, arguments), (c, g), (times, details)
+    times, c, g, q, h, details = get_data()
+    return parser, (options, arguments), (c, g, q, h), (times, details)
 
 
 def booking(options, info):
@@ -82,7 +90,7 @@ def booking(options, info):
 
 
 def lookup(options, rooms, info):
-    if options.lookup and (options.grattan or options.computing):
+    if options.lookup and (options.grattan or options.computing or options.nursing or options.business):
         opts.lookup_building(rooms, info, options)
     elif options.lookup:
         opts.lookup_room(info)
