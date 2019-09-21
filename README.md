@@ -1,5 +1,9 @@
 # dcurooms
 
+<p align="center">
+  <img width="460" height="300" src="https://github.com/theycallmemac/dcurooms/blob/master/dcurooms-logo.png?raw=true"/>
+</p>
+
 ![TravisCI Status](https://travis-ci.org/theycallmemac/dcurooms.svg?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/d41179565d12397e7438/maintainability)](https://codeclimate.com/github/theycallmemac/dcurooms/maintainability) [![GitHub license](https://img.shields.io/github/license/theycallmemac/dcurooms.svg)](https://github.com/theycallmemac/dcurooms/blob/master/LICENSE)
 
 ### Description
